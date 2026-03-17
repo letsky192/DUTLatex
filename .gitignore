@@ -1,0 +1,29 @@
+﻿# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.lof
+*.lot
+*.out
+*.toc
+*.toe
+*.synctex.gz
+*.xdv
+*.pdf
+
+# Chapter-level auxiliary files
+chapters/*.aux
+chapters/*.toc
+chapters/*.lof
+chapters/*.lot
+chapters/*.out
+
+# Latexmk temp
+latexmkrc.bak
+
+# OS/Editor
+.DS_Store
+Thumbs.db
