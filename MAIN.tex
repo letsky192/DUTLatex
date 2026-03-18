@@ -19,36 +19,42 @@
 % \usepackage[bold-style=ISO]{unicode-math} % 使用 unicode-math 宏包
 % \setmathfont{XITS Math}                    % 设置数学字体为 XITS Math
 
+%================ 用户信息填写（value 宏） ================
+% 封面与学位信息
+\title{论文题目}
+\author{姓名}
+\studentnumber{学号}
+\advisor{导师}
+\major{专业}
+\defenddate{2026年03月18日}
+
+% 答辩委员会与答辩信息
+\committeeTitleOne{大连理工大学教授:}
+\committeeTitleTwo{大连理工大学副教授:}
+\committeeTitleThree{XXXXXXXXXXXX高工:}
+\committeeTitleFour{XXXXXXXX大学教授:}
+\committeeTitleFive{大连理工大学研究员:}
+
+\committeeMemberOne{\Anon{ABC}}
+\committeeMemberTwo{DE}
+\committeeMemberThree{FGH}
+\committeeMemberFour{IJK}
+\committeeMemberFive{LM}
+
+\defenseCandidate{硕士生}
+\defenseLocation{大连理工大学综合教学1号楼301室}
+
+% 声明页日期
+\statementDateYear{年}
+\statementDateMonth{月}
+\statementDateDay{日}
+
+%================ 进入正文 ================
 \begin{document}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% 封面
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% 以下这些命令是在给模板传入答辩委员会/评审相关信息
-% titleone ~ titlefive：身份/职称说明
-% profone ~ proffive：对应姓名
-
-\titleone{大连理工大学教授:}
-\titletwo{大连理工大学副教授:}
-\titlethree{XXXXXXXXXXXX高工:}
-\titlefour{XXXXXXXX大学教授:}
-\titlefive{大连理工大学研究员:}
-
-\profone{\Anon{ABC}}
-\proftwo{DE}
-\profthree{FGH}
-\proffour{IJK}
-\proffive{LM}
-
-% 答辩人身份
-\dabianren{硕士生}
-
-% 答辩时间
-\shijian{2023年05月30日}
-
-% 答辩地点
-\where{大连理工大学综合教学1号楼301室}
 
 % 生成封面页
 \maketitle

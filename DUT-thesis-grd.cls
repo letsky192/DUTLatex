@@ -1,4 +1,4 @@
-%==================================================
+﻿%==================================================
 %% DUT-thesis-grd.cls for DUT Thesis
 %% version: 2.0
 %% last update: Apr 27th, 2026
@@ -114,19 +114,22 @@
 %% =================================================================
 %% ctex 宏的重定义：目录、图目录、表目录标题
 %% =================================================================
-\renewcommand\contentsname{目　　录}
-\renewcommand\listfigurename{图~目~录}
-\renewcommand\listtablename{表~目~录}
+\renewcommand\contentsname{\DUT@label@toc}
+\renewcommand\listfigurename{\DUT@label@listfigure}
+\renewcommand\listtablename{\DUT@label@listtable}
 
 %% =================================================================
-%% DUT宏定义：中文封面与学位信息（固定值）
+%% 固定文本与用户填写值（统一定义区）
+%% label = 固定文本（模板内置，不建议用户改动）
+%% value = 用户填写值（主文件接口可覆盖）
 %% =================================================================
+%% ---- Label: 封面与学位信息 ----
 \def\DUT@label@major{学科、~~专业:}
 \def\DUT@label@title{论文题目}
 \def\DUT@label@author{作~~者~~姓~~名:}
 \def\DUT@label@classification{中图分类号：}
 \def\DUT@label@confidential{密级}
-\def\DUT@label@UDC{UDC\!分类号：}
+\def\DUT@label@udc{UDC\!分类号：}
 \def\DUT@label@serialnumber{编号}
 \def\DUT@label@thesis{学位论文}
 \def\DUT@label@advisor{指~~导~~教~~师:}
@@ -138,84 +141,26 @@
 \def\DUT@label@school{学~位~授~予~单~位}
 \def\DUT@label@chairman{答辩委员会主席}
 
-%% =================================================================
-%% DUT宏定义：中文封面与学位信息（缺省值，可覆盖）
-%% =================================================================
-\def\DUT@value@classification{}
-\def\DUT@value@confidential{}
-\def\DUT@value@UDC{}
-\def\DUT@value@serialnumber{}
-\def\DUT@value@school{}
-\def\DUT@value@degree{}
-\def\DUT@value@title{~~~~~（论~文~题~目）~~~~~}
-\def\DUT@value@vtitle{竖排论文题目}
-\def\DUT@value@titlemark{\DUT@value@title}
-\def\DUT@value@author{（作~者~姓~名）}
-\def\DUT@value@advisor{（姓名、专业技术职务、学位）}
-\def\DUT@value@advisorinstitute{（单位）}
-\def\DUT@value@major{}
-\def\DUT@value@studentnumber{}
-\def\DUT@value@submitdate{}
-\def\DUT@value@defenddate{}
-\def\DUT@value@institute{}
-\def\DUT@value@chairman{}
-\def\DUT@label@statement{}
+%% ---- Label: 标题页固定文本 ----
+\def\DUT@label@cover@degree{硕士学位论文}
+\def\DUT@label@cover@spec{大连理工大学硕士学位论文格式规范}
+\def\DUT@label@cover@spec@en{Format Criterion of Master Degree Thesis of DUT}
+\def\DUT@label@cover@school{大连理工大学}
+\def\DUT@label@cover@school@en{Dalian University of Technology}
+\def\DUT@label@cover@note{注：对于专业学位硕士,企业或实践导师必填,写法样例:XXX(企业导师)或XXX(实践导师)}
 
-%% =================================================================
-%% DUT宏定义：原创性声明、版权授权、答辩委员会（固定值）
-%% =================================================================
+%% ---- Label: 声明与授权 ----
 \def\DUT@label@original{学位论文原创性申明}
-\def\DUT@label@committeemembers{硕士学位论文答辩委员会}
+\def\DUT@label@committee{硕士学位论文答辩委员会}
 \def\DUT@label@authorization{大连理工大学学位论文版权使用授权书}
-\def\DUT@label@authorsign{作~~者~~签~~名~~：}
-\def\DUT@label@Supervisorsign{导~~师~~签~~名~~：}
-\def\DUT@label@originalDate{日期：}
-\def\DUT@label@originaltitle{学位论文题目：}
+\def\DUT@label@author@sign{作~~者~~签~~名~~：}
+\def\DUT@label@supervisor@sign{导~~师~~签~~名~~：}
+\def\DUT@label@date{日期：}
+\def\DUT@label@thesistitle{学位论文题目：}
+\def\DUT@label@originalcontent{本人郑重声明：所呈交的学位论文，是本人在导师的指导下，独立进行研究工作所取得的成果。除文中已经指明引用的内容外，学位论文不含任何其他个人、法人或者非法人组织已经发表或尚未发表的作品，且学位论文中已经指明作者姓名或者名称、作品名称的内容，不影响该作品的正常使用，也不存在不合理地损害相关权利人的合法权益的任何情形。对学位论文研究做出重要贡献的个人和法人或者非法人组织，均已在论文中以明确方式标明，且不存在任何著作权纠纷。\par 若因声明不实，本人愿意为此承当相应的法律责任。}
+\def\DUT@label@authorizationcontent{本人完全了解大连理工大学有关学位论文知识产权的规定，在校攻读学位期间论文工作的知识产权属于大连理工大学，允许论文被查阅和借阅。学校有权保留论文并向国家有关部门或机构送交论文的复印件和电子版，可以将本学位论文的全部或部分内容编入有关数据库进行检索，可以采用影印、缩印、或扫描等复制手段保存和汇编本学位论文。}
 
-%% =================================================================
-%% DUT宏定义：答辩委员会与答辩安排（缺省值，可覆盖）
-%% =================================================================
-\def\DUT@value@titleone{}
-\def\DUT@value@titletwo{}
-\def\DUT@value@titlethree{}
-\def\DUT@value@titlefour{}
-\def\DUT@value@titlefive{}
-\def\DUT@value@profone{}
-\def\DUT@value@proftwo{}
-\def\DUT@value@profthree{}
-\def\DUT@value@proffour{}
-\def\DUT@value@proffive{}
-\def\DUT@value@dabianren{}%%待改名字为英文单词
-\def\DUT@value@shijian{}%%待改名字为英文单词
-\def\DUT@value@where{}%%待改名字为英文单词
-
-%% =================================================================
-%% 主文件接口：供用户填写答辩委员会与答辩信息
-%% =================================================================
-\newcommand\titleone[1]{\def\DUT@value@titleone{#1}}
-\newcommand\titletwo[1]{\def\DUT@value@titletwo{#1}}
-\newcommand\titlethree[1]{\def\DUT@value@titlethree{#1}}
-\newcommand\titlefour[1]{\def\DUT@value@titlefour{#1}}
-\newcommand\titlefive[1]{\def\DUT@value@titlefive{#1}}
-\newcommand\profone[1]{\def\DUT@value@profone{#1}}
-\newcommand\proftwo[1]{\def\DUT@value@proftwo{#1}}
-\newcommand\profthree[1]{\def\DUT@value@profthree{#1}}
-\newcommand\proffour[1]{\def\DUT@value@proffour{#1}}
-\newcommand\proffive[1]{\def\DUT@value@proffive{#1}}
-\newcommand\dabianren[1]{\def\DUT@value@dabianren{#1}}
-\newcommand\shijian[1]{\def\DUT@value@shijian{#1}}
-\newcommand\where[1]{\def\DUT@value@where{#1}}
-
-%% =================================================================
-%% DUT宏定义：声明页正文常量
-%% =================================================================
-\def\DUT@label@originalchairman{答辩委员会主席：}%在哪里用过？？？？？？？？？？
-\def\DUT@label@originalcontent{\DUTspace\DUTspace 本人郑重声明：所呈交的学位论文，是本人在导师的指导下，独立进行研究工作所取得的成果。除文中已经指明引用的内容外，学位论文不含任何其他个人、法人或者非法人组织已经发表或尚未发表的作品，且学位论文中已经指明作者姓名或者名称、作品名称的内容，不影响该作品的正常使用，也不存在不合理地损害相关权利人的合法权益的任何情形。对学位论文研究做出重要贡献的个人和法人或者非法人组织，均已在论文中以明确方式标明，且不存在任何著作权纠纷。\par 若因声明不实，本人愿意为此承当相应的法律责任。}
-\def\DUT@label@authorizationcontent{\DUTspace\DUTspace 本人完全了解大连理工大学有关学位论文知识产权的规定，在校攻读学位期间论文工作的知识产权属于大连理工大学，允许论文被查阅和借阅。学校有权保留论文并向国家有关部门或机构送交论文的复印件和电子版，可以将本学位论文的全部或部分内容编入有关数据库进行检索，可以采用影印、缩印、或扫描等复制手段保存和汇编本学位论文。}
-
-%% =================================================================
-%% DUT宏定义：论文固定章节标题与模板版本信息
-%% =================================================================
+%% ---- Label: 章节标题与页眉 ----
 \def\DUT@label@abstract{摘要}
 \def\DUT@label@keywords{关键词：}
 \def\DUT@label@englishkeywords{Key Words:~}
@@ -224,17 +169,148 @@
 \def\DUT@label@publications{攻读硕士学位期间科研项目及科研成果}
 \def\DUT@label@projects{攻读学位期间参与的项目}
 \def\DUT@label@resume{作者简介}
-\def\DUT@label@reference{参考文献!!!!}
+\def\DUT@label@reference{参考文献}
+\def\DUT@label@reference@title{参~~考~~文~~献}
 \def\DUT@label@thanks{致谢}
+\def\DUT@label@thanks@title{致~~~~~~谢}
+\def\DUT@label@symbolnote{符号说明}
+\def\DUT@label@denotation{主要符号表}
+\def\DUT@label@toc{目录}
+\def\DUT@label@toc@title{目　　录}
+\def\DUT@label@listfigure{图~目~录}
+\def\DUT@label@listtable{表~目~录}
+\def\DUT@label@listingname{代码}
+\def\DUT@label@proofname{证明}
+\def\DUT@label@algorithm@input{Input:}
+\def\DUT@label@algorithm@output{Output:}
+\def\DUT@label@figure@en{Fig.}
+\def\DUT@label@table@en{Tab.}
+\def\DUT@label@figure@appendix{附录-图}
+\def\DUT@label@table@appendix{附录-表}
+\def\DUT@label@figure@appendix@en{App.Fig.}
+\def\DUT@label@table@appendix@en{App.Tab.}
+\def\DUT@label@headschoolname{大连理工大学硕士学位论文}
+\def\DUT@label@headspecname{大连理工大学硕士学位论文格式规范}
+\def\DUT@label@bookmark@statement{声明}
+\def\DUT@label@bookmark@committee{委员会}
+\def\DUT@label@committee@candidate{答辩人:}
+\def\DUT@label@committee@members{答辩委员会委员:}
+\def\DUT@label@committee@date{答辩日期:}
+\def\DUT@label@committee@location{答辩地点:}
+\def\DUT@label@committee@chairnote{（注:主席）}
+\def\DUT@label@abstract@en{ABSTRACT}
+\def\DUT@label@contents@en{TABLE OF CONTENTS}
+\def\DUT@label@references@en{References}
+\def\DUT@label@publications@en{Achievements}
+\def\DUT@label@resume@en{CV}
+\def\DUT@label@thanks@en{Acknowledgements}
+
+%% ---- Value: 封面与学位信息 ----
+\def\DUT@value@classification{分类号}
+\def\DUT@value@confidential{密级}
+\def\DUT@value@udc{UDC分类号}
+\def\DUT@value@serialnumber{编号}
+\def\DUT@value@school{学位授予单位}
+\def\DUT@value@degree{申请学位}
+\def\DUT@value@title{论文题目}
+\def\DUT@value@vtitle{竖排论文题目}
+\def\DUT@value@titlemark{\DUT@value@title}
+\def\DUT@value@author{姓名}
+\def\DUT@value@advisor{导师}
+\def\DUT@value@advisorinstitute{单位}
+\def\DUT@value@major{专业}
+\def\DUT@value@studentnumber{学号}
+\def\DUT@value@submitdate{论文提交日期}
+\def\DUT@value@defenddate{2026年03月18日}
+\def\DUT@value@institute{学院名称}
+\def\DUT@value@chairman{答辩委员会主席}
+
+%% ---- Value: 答辩委员会与安排 ----
+\def\DUT@value@committee@titleone{委员职称1}
+\def\DUT@value@committee@titletwo{委员职称2}
+\def\DUT@value@committee@titlethree{委员职称3}
+\def\DUT@value@committee@titlefour{委员职称4}
+\def\DUT@value@committee@titlefive{委员职称5}
+\def\DUT@value@committee@profone{委员1}
+\def\DUT@value@committee@proftwo{委员2}
+\def\DUT@value@committee@profthree{委员3}
+\def\DUT@value@committee@proffour{委员4}
+\def\DUT@value@committee@proffive{委员5}
+\def\DUT@value@defense@candidate{答辩人}
+\def\DUT@value@defense@date{答辩日期}
+\def\DUT@value@defense@location{答辩地点}
+
+%% ---- Value: 声明页日期 ----
+\def\DUT@value@statement@year{年}
+\def\DUT@value@statement@month{月}
+\def\DUT@value@statement@day{日}
+
+%% ---- Value: 模板版本 ----
 \def\DUT@value@templateversion{v2.0}
 
 %% =================================================================
-%% DUT宏定义：页眉页脚中使用的固定学校名称
+%% 主文件接口（命名规范化：英文）
 %% =================================================================
-\def\DUT@label@headschoolname{大连理工大学硕士学位论文}
+%% 封面与学位信息
+\newcommand\classification[1]{\def\DUT@value@classification{#1}}
+\newcommand\studentnumber[1]{\def\DUT@value@studentnumber{#1}}
+\newcommand\confidential[1]{\def\DUT@value@confidential{#1}}
+\newcommand\udc[1]{\def\DUT@value@udc{#1}}
+\newcommand\serialnumber[1]{\def\DUT@value@serialnumber{#1}}
+\newcommand\school[1]{\def\DUT@value@school{#1}}
+\newcommand\degree[1]{\def\DUT@value@degree{#1}}
+\renewcommand\title[2][\DUT@value@title]{%
+  \def\DUT@value@title{#2}%
+  \def\DUT@value@titlemark{\MakeUppercase{#1}}%
+}
+\newcommand\vtitle[1]{\def\DUT@value@vtitle{#1}}
+\renewcommand\author[1]{\def\DUT@value@author{#1}}
+\newcommand\advisor[1]{\def\DUT@value@advisor{#1}}
+\newcommand\advisorinstitute[1]{\def\DUT@value@advisorinstitute{#1}}
+\newcommand\major[1]{\def\DUT@value@major{#1}}
+\newcommand\submitdate[1]{\def\DUT@value@submitdate{#1}}
+\newcommand\defenddate[1]{\def\DUT@value@defenddate{#1}}
+\newcommand\institute[1]{\def\DUT@value@institute{#1}}
+\newcommand\chairman[1]{\def\DUT@value@chairman{#1}}
 
-%% 当前模板版本输出函数：\version
+%% 答辩委员会与安排
+\newcommand\committeeTitleOne[1]{\def\DUT@value@committee@titleone{#1}}
+\newcommand\committeeTitleTwo[1]{\def\DUT@value@committee@titletwo{#1}}
+\newcommand\committeeTitleThree[1]{\def\DUT@value@committee@titlethree{#1}}
+\newcommand\committeeTitleFour[1]{\def\DUT@value@committee@titlefour{#1}}
+\newcommand\committeeTitleFive[1]{\def\DUT@value@committee@titlefive{#1}}
+\newcommand\committeeMemberOne[1]{\def\DUT@value@committee@profone{#1}}
+\newcommand\committeeMemberTwo[1]{\def\DUT@value@committee@proftwo{#1}}
+\newcommand\committeeMemberThree[1]{\def\DUT@value@committee@profthree{#1}}
+\newcommand\committeeMemberFour[1]{\def\DUT@value@committee@proffour{#1}}
+\newcommand\committeeMemberFive[1]{\def\DUT@value@committee@proffive{#1}}
+\newcommand\defenseCandidate[1]{\def\DUT@value@defense@candidate{#1}}
+\newcommand\defenseLocation[1]{\def\DUT@value@defense@location{#1}}
+
+%% 声明页日期
+\newcommand\statementDateYear[1]{\def\DUT@value@statement@year{#1}}
+\newcommand\statementDateMonth[1]{\def\DUT@value@statement@month{#1}}
+\newcommand\statementDateDay[1]{\def\DUT@value@statement@day{#1}}
+
+%% 版本号
 \newcommand{\version}{\DUT@value@templateversion}
+
+%% =================================================================
+%% 兼容旧接口（避免主文件立即报错）
+%% =================================================================
+\newcommand\titleone[1]{\committeeTitleOne{#1}}
+\newcommand\titletwo[1]{\committeeTitleTwo{#1}}
+\newcommand\titlethree[1]{\committeeTitleThree{#1}}
+\newcommand\titlefour[1]{\committeeTitleFour{#1}}
+\newcommand\titlefive[1]{\committeeTitleFive{#1}}
+\newcommand\profone[1]{\committeeMemberOne{#1}}
+\newcommand\proftwo[1]{\committeeMemberTwo{#1}}
+\newcommand\profthree[1]{\committeeMemberThree{#1}}
+\newcommand\proffour[1]{\committeeMemberFour{#1}}
+\newcommand\proffive[1]{\committeeMemberFive{#1}}
+\newcommand\dabianren[1]{\defenseCandidate{#1}}
+\newcommand\where[1]{\defenseLocation{#1}}
+\newcommand\UDC[1]{\udc{#1}}
 
 %% =================================================================
 %% 版面设置与基础排版控制
@@ -369,8 +445,8 @@
 \fancypagestyle{DUT@headings}{
   \fancyhf{}
   \fancyfoot[C]{\songti\zihao{5} \thepage}  %%页脚中部显示页码
-  \fancyhead[CO]{\zihao{5}{\songti 大连理工大学硕士学位论文}}%%？？？？？？？？？？？？？应改为主文件输入
-  \fancyhead[CE]{\zihao{5}{\songti 大连理工大学硕士学位论文格式规范}}
+  \fancyhead[CO]{\zihao{5}{\songti \DUT@label@headschoolname}}%%页眉奇数页
+  \fancyhead[CE]{\zihao{5}{\songti \DUT@label@headspecname}}%%页眉偶数页
 }
 
 %% =================================================================
@@ -453,7 +529,7 @@
 \newtheorem{case}{情形~}
 
 %% proof 环境标题改为中文“证明”
-\renewcommand{\proofname}{\bf 证明}
+\renewcommand{\proofname}{\bf \DUT@label@proofname}
 
 %% =================================================================
 %% 英文字体设置
@@ -490,9 +566,9 @@
 }
 
 %% 图的英文第二标题名称
-\captionsetup[figure][bi-second]{name=Fig.}
+\captionsetup[figure][bi-second]{name=\DUT@label@figure@en}
 %% 表的英文第二标题名称
-\captionsetup[table][bi-second]{name=Tab.}
+\captionsetup[table][bi-second]{name=\DUT@label@table@en}
 
 %% 表标题：置于表格上方
 \captionsetup[table]{
@@ -578,19 +654,19 @@
   extendedchars      = false,
   columns            = flexible,
   mathescape         = true,
-  numbersep          = -1em,
+  numbersep          = 1.5em,
 }
 
 %% listings 标题名称改为“代码”
-\renewcommand{\lstlistingname}{代码}
+\renewcommand{\lstlistingname}{\DUT@label@listingname}
 
 %% 算法环境：编号按 chapter 计数
 \newcounter{algorithm}[chapter]
 \usepackage{algorithm}%% 算法浮动体环境
 \usepackage{algorithmicx}%%算法排版宏包
 \usepackage{algpseudocode}%%伪代码风格宏包
-\renewcommand{\algorithmicrequire}{\textbf{Input:}}%%输入使用input替换require，输出使用output替换ensure
-\renewcommand{\algorithmicensure}{\textbf{Output:}}
+\renewcommand{\algorithmicrequire}{\textbf{\DUT@label@algorithm@input}}
+\renewcommand{\algorithmicensure}{\textbf{\DUT@label@algorithm@output}}
 \renewcommand\thealgorithm{\thechapter.\arabic{algorithm}}%%算法编号格式为“章号.序号”
 
 
@@ -628,6 +704,18 @@
 %% 例如 \DUTspace[2] 表示约两个汉字宽的空格。
 \newcommand{\DUTspace}[1][1]{\hspace{#1\ccwd}}%%？？？？？？？？？感觉可以复用到图表标题
 
+%% 从 \DUT@value@defenddate 中拆分 年/月/日（格式示例：2023年05月30日）
+\newcommand{\DUT@splitdefenddate}{%
+  \def\DUT@defend@year{\DUT@value@defenddate}%
+  \def\DUT@defend@month{}%
+  \def\DUT@defend@day{}%
+  \IfSubStr{\DUT@value@defenddate}{年}{%
+    \StrBefore{\DUT@value@defenddate}{年}[\DUT@defend@year]%
+    \StrBetween{\DUT@value@defenddate}{年}{月}[\DUT@defend@month]%
+    \StrBetween{\DUT@value@defenddate}{月}{日}[\DUT@defend@day]%
+  }{}%
+}
+
 %% 提取类文件版本信息。不是给正文内容服务的，而是给模板自身的元信息服务。
 %% 这里保留了历史兼容逻辑：名称仍然沿用旧模板中的 dutmaster-xetex.cls。
 \def\DUT@getfileinfo#1 #2 #3\relax#4\relax{%%字符拆解器：将输入字符串按空格拆解为三部分，分别赋值给 #1、#2、#3，直到遇到 \relax 结束。
@@ -649,33 +737,6 @@
 \def\DUTunderline{\@ifnextchar[\DUT@underline\underline}%%\@ifnextchar为3目运算符，如果下一个字符是[，则调用\DUT@underline，否则调用\underline
 
 %% =================================================================
-%% 定义中文标题页信息接口函数：供主文件填写封面字段
-%% =================================================================
-\newcommand\classification[1]{\def\DUT@value@classification{#1}}%分类号接口函数
-\newcommand\studentnumber[1]{\def\DUT@value@studentnumber{#1}}%学号接口函数
-\newcommand\confidential[1]{\def\DUT@value@confidential{#1}}%密级接口函数
-\newcommand\UDC[1]{\def\DUT@value@UDC{#1}}%UDC接口函数
-\newcommand\serialnumber[1]{\def\DUT@value@serialnumber{#1}}%序列号接口函数
-\newcommand\school[1]{\def\DUT@value@school{#1}}%单位接口函数
-\newcommand\degree[1]{\def\DUT@value@degree{#1}}%学位接口函数
-
-%% 重定义\title函数，增加可选参数用于页眉/书签中的大写标题，默认取正文标题。
-\renewcommand\title[2][\DUT@value@title]{%默认参数为 \DUT@value@title
-  \def\DUT@value@title{#2}%
-  \def\DUT@value@titlemark{\MakeUppercase{#1}}%？？？？？本行是否可以放到#2前
-}
-
-\newcommand\vtitle[1]{\def\DUT@value@vtitle{#1}}%竖排标题接口函数
-\renewcommand\author[1]{\def\DUT@value@author{#1}}%作者姓名接口函数
-\newcommand\advisor[1]{\def\DUT@value@advisor{#1}}%导师姓名接口函数
-\newcommand\advisorinstitute[1]{\def\DUT@value@advisorinstitute{#1}}%导师单位接口函数
-\newcommand\major[1]{\def\DUT@value@major{#1}}%专业接口函数
-\newcommand\submitdate[1]{\def\DUT@value@submitdate{#1}}%提交日期接口函数
-\newcommand\defenddate[1]{\def\DUT@value@defenddate{#1}}%答辩日期接口函数
-\newcommand\institute[1]{\def\DUT@value@institute{#1}}%单位接口函数
-\newcommand\chairman[1]{\def\DUT@value@chairman{#1}}%答辩委员会主席接口函数
-
-%% =================================================================
 %% 中文标题页绘制
 %% =================================================================
 %% 这里定义行楷字体族，并且简化了使用方式，例如 \xkai{大连理工大学} 就可以直接输出行楷字体的校名。
@@ -684,7 +745,7 @@
 
 %% 重定义绘制中文标题页。
 %% 注意：当前页面中的若干占位文字、签名图片路径等都沿用原模板写法。
-\renewcommand\maketitle[1]{%
+\renewcommand\maketitle{%
   \cleardoublepage
   \thispagestyle{empty}
 
@@ -695,31 +756,31 @@
 
     \parbox[t][4.40cm][c]{\textwidth}{%
       \begin{center}
-        {\songti\zihao{-1}\textsf{硕士学位论文}\\}%%？？？？？？？？？？？？这地方也得做成主文件可修改
+        {\songti\zihao{-1}\textsf{\DUT@label@cover@degree}\\}
         \vspace{1.34cm}
-        {\heiti\zihao{2}\textsf{大连理工大学硕士学位论文格式规范}\\}%%？？？？？？？？？？？？这地方也得做成主文件可修改
+        {\heiti\zihao{2}\textsf{\DUT@label@cover@spec}\\}
         \vspace{0.13cm}
-        {\zihao{3}\textbf{Format Criterion of Master Degree Thesis of DUT}\\}
+        {\zihao{3}\textbf{\DUT@label@cover@spec@en}\\}
       \end{center}
     }
 
     \vspace{50.2mm}
 
-    {\songti\zihao{-3}\DUT@label@author}\DUTunderline[170pt]{\songti\zihao{-3}姓名}%%？？？？？？？？？？？？这地方也得做成主文件可修改
+    {\songti\zihao{-3}\DUT@label@author}\DUTunderline[170pt]{\songti\zihao{-3}\DUT@value@author}
     \vskip 10pt
-    {\songti\zihao{-3}\DUT@label@studentnumber}\DUTunderline[170pt]{\songti\zihao{-3}12345678}
+    {\songti\zihao{-3}\DUT@label@studentnumber}\DUTunderline[170pt]{\songti\zihao{-3}\DUT@value@studentnumber}
     \vskip 10pt
-    {\songti\zihao{-3}\DUT@label@advisor}\DUTunderline[170pt]{\songti\zihao{-3}导师}%%？？？？？？？？？？？？这地方也得做成主文件可修改
+    {\songti\zihao{-3}\DUT@label@advisor}\DUTunderline[170pt]{\songti\zihao{-3}\DUT@value@advisor}
     \vskip 10pt
-    {\songti\zihao{-3}\DUT@label@major}\DUTunderline[170pt]{\songti\zihao{-3}专业}
+    {\songti\zihao{-3}\DUT@label@major}\DUTunderline[170pt]{\songti\zihao{-3}\DUT@value@major}
     \vskip 10pt
-    {\songti\zihao{-3}\DUT@label@defenddate}\DUTunderline[170pt]{\songti\zihao{-3}2023年4月}
+    {\songti\zihao{-3}\DUT@label@defenddate}\DUTunderline[170pt]{\songti\zihao{-3}\DUT@value@defenddate}
     \vskip 3pt
-    \colorbox{yellow}{注：对于专业学位硕士,企业或实践导师必填,写法样例:XXX(企业导师)或XXX(实践导师)}%%等待修改
+    \colorbox{yellow}{\DUT@label@cover@note}
     \\ \vspace{31.4mm}
-    {\Large\xkai 大连理工大学\\}
+    {\Large\xkai \DUT@label@cover@school\\}
     \vspace{2.3mm}
-    {\zihao{-4} Dalian University of Technology}
+    {\zihao{-4} \DUT@label@cover@school@en}
   \end{center}
 
   \vskip \stretch{0.5}%垂直方向上放可伸缩空白
@@ -735,8 +796,9 @@
 %% =================================================================
 \newcommand\makeDeclareOriginal{%
   \cleardoublepage
-  \pdfbookmark[0]{声明}{statement}%pdf加书签“声明”，内部锚点为statement
+  \pdfbookmark[0]{\DUT@label@bookmark@statement}{statement}%pdf加书签“声明”，内部锚点为statement
   \thispagestyle{empty}%无页眉页脚
+  \DUT@splitdefenddate
 
   \begin{center}
     \parbox[t][1.52cm][c]{\textwidth}
@@ -746,12 +808,12 @@
   \vskip 10pt
   {\songti\zihao{-4}\DUT@label@originalcontent}%%声明内容
   \vskip 10pt
-  {\songti\zihao{-4}\DUT@label@originaltitle}\DUTunderline[303pt]{填写自己的学位论文题目}%%又是不能在主文件修改的，要改
+  {\songti\zihao{-4}\DUT@label@thesistitle}\DUTunderline[303pt]{\DUT@value@title}
   \vskip 3pt
-  \indent{\songti\zihao{-4}\DUT@label@authorsign}
+  \indent{\songti\zihao{-4}\DUT@label@author@sign}
   \DUTunderline[8em]{\includegraphics[height=0.8cm]{figures/figure2}}
   \hspace{1.3em}
-  {\songti\zihao{-4}\DUT@label@originalDate}\DUTunderline[4em]{2023}~年~\DUTunderline[2em]{4}~月~\DUTunderline[2em]{7}~日~%%是不是也可以改成前面那种拆分字符串的形式，在主文件里面可改
+  {\songti\zihao{-4}\DUT@label@date}\DUTunderline[4em]{\DUT@defend@year}~年~\DUTunderline[2em]{\DUT@defend@month}~月~\DUTunderline[2em]{\DUT@defend@day}~日~
 
   \vskip 20mm
 
@@ -762,15 +824,15 @@
   \vskip 10pt
   {\songti\zihao{-4} \DUT@label@authorizationcontent}
   \vskip 25pt
-  {\songti\zihao{-4}\DUT@label@originaltitle}\DUTunderline[303pt]{填写自己的学位论文题目}
+  {\songti\zihao{-4}\DUT@label@thesistitle}\DUTunderline[303pt]{\DUT@value@title}
   \vskip 3pt
-  \indent{\songti\zihao{-4}\DUT@label@authorsign}
+  \indent{\songti\zihao{-4}\DUT@label@author@sign}
   \DUTunderline[10.65em]{\includegraphics[height=0.8cm]{figures/figure2}}
-  {\songti\zihao{-4}\DUT@label@originalDate}\DUTunderline[3em]{2023}年~\DUTunderline[2em]{4}~月~\DUTunderline[2em]{7}~日~
+  {\songti\zihao{-4}\DUT@label@date}\DUTunderline[3em]{\DUT@defend@year}年~\DUTunderline[2em]{\DUT@defend@month}~月~\DUTunderline[2em]{\DUT@defend@day}~日~
   \vskip 3pt
-  \indent{\songti\zihao{-4}\DUT@label@Supervisorsign}
+  \indent{\songti\zihao{-4}\DUT@label@supervisor@sign}
   \DUTunderline[10.65em]{\includegraphics[height=0.8cm]{figures/figure1}}
-  {\songti\zihao{-4}\DUT@label@originalDate}\DUTunderline[3em]{2023}~年~\DUTunderline[2em]{4}~月~\DUTunderline[2em]{7}~日~
+  {\songti\zihao{-4}\DUT@label@date}\DUTunderline[3em]{\DUT@defend@year}~年~\DUTunderline[2em]{\DUT@defend@month}~月~\DUTunderline[2em]{\DUT@defend@day}~日~
   \vskip 3pt
 
   \clearpage
@@ -785,35 +847,35 @@
 %% =================================================================
 \newcommand\committee{%
   \cleardoublepage
-  \pdfbookmark[0]{委员会}{council}
+  \pdfbookmark[0]{\DUT@label@bookmark@committee}{council}
   \thispagestyle{empty}
 
   \begin{center}
     \parbox[t][1.52cm][c]{\textwidth}
-    {\heiti\zihao{-2}\centerline \DUT@label@committeemembers}
+    {\heiti\zihao{-2}\centerline \DUT@label@committee}
   \end{center}
 
   \vskip 50pt
-  {\songti\zihao{4} \noindent{答辩人:\DUT@value@dabianren}}%%答辩人也得改成lablel的形式
+  {\songti\zihao{4} \noindent{\DUT@label@committee@candidate\DUT@value@defense@candidate}}
   \vskip 35pt
-  {\songti\zihao{4} \noindent{答辩委员会委员:}}
+  {\songti\zihao{4} \noindent{\DUT@label@committee@members}}
   \vskip 25pt
 
   \begin{center}
     {\zihao{4}
       \begin{tabular}{rl}
-        \DUT@value@titleone   & {\DUTunderline[150pt]{\DUT@value@profone}}\songti\zihao{5}（注:主席）\\[0.7cm]%%为什么这个地方要特地表明字体和字号
-        \DUT@value@titletwo   & \DUTunderline[150pt]{\DUT@value@proftwo}\\[0.7cm]%%0.7cm行间距
-        \DUT@value@titlethree & \DUTunderline[150pt]{\DUT@value@profthree}\\[0.7cm]
-        \DUT@value@titlefour  & \DUTunderline[150pt]{\DUT@value@proffour}\\[0.7cm]
-        \DUT@value@titlefive  & \DUTunderline[150pt]{\DUT@value@proffive}%%这种写法就对了，给接口到主文件中进行修改，但是\DUT@value@titlefive这种还是要改成\DUT@value@labelfive这种
+        \DUT@value@committee@titleone   & {\DUTunderline[150pt]{\DUT@value@committee@profone}}\songti\zihao{5}\DUT@label@committee@chairnote\\[0.7cm]
+        \DUT@value@committee@titletwo   & \DUTunderline[150pt]{\DUT@value@committee@proftwo}\\[0.7cm]
+        \DUT@value@committee@titlethree & \DUTunderline[150pt]{\DUT@value@committee@profthree}\\[0.7cm]
+        \DUT@value@committee@titlefour  & \DUTunderline[150pt]{\DUT@value@committee@proffour}\\[0.7cm]
+        \DUT@value@committee@titlefive  & \DUTunderline[150pt]{\DUT@value@committee@proffive}
       \end{tabular}}
   \end{center}
 
   \vskip 40pt
-  {\songti\zihao{4} \noindent{答辩日期:~\DUT@value@shijian}}
+  {\songti\zihao{4} \noindent{\DUT@label@committee@date~\DUT@value@defenddate}}
   \vskip 15pt
-  {\songti\zihao{4} \noindent{答辩地点:\DUT@value@where}}
+  {\songti\zihao{4} \noindent{\DUT@label@committee@location\DUT@value@defense@location}}
 
   \clearpage
   \if@twoside
@@ -866,7 +928,7 @@
 \newenvironment{englishabstract}%%
   {%
     \clearpage
-    \chapter{ABSTRACT}
+    \chapter{\DUT@label@abstract@en}
   }
   {}
 
@@ -885,17 +947,17 @@
   \else
     \@restonecolfalse
   \fi
-  \chapter*{\contentsname}% 章标题不编号，但显示“目录”
-  \addcontentsline{toc}{chapter}{目录}%将目录添加到 toc 中，作为 chapter 级别的条目，显示文本为“目录”
+  \chapter*{\DUT@label@toc@title}% 章标题不编号，但显示“目录”
+  \addcontentsline{toc}{chapter}{\contentsname}%将目录添加到 toc 中
   \@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}%%设置页眉左右两侧的文本为大写的“目录”，正文里好像没有显现
-  \pdfbookmark[0]{目录}{bittoc}
+  \pdfbookmark[0]{\contentsname}{bittoc}
   \@starttoc{toc}% 从 toc 文件读取目录内容并生成目录
   \if@restonecol\twocolumn\fi
 }
 
 %% 英文目录标题文本
-\def\engcontentsname{CONTENTS}%这地方没有使用变量，并且好像与下一行有些重复
-\renewcommand\engcontentsname{\bf\zihao{-3} \hfill TABLE OF CONTENTS \hfill}
+\def\engcontentsname{\DUT@label@contents@en}
+\renewcommand\engcontentsname{\bf\zihao{-3} \hfill \DUT@label@contents@en \hfill}
 
 %% 英文目录：从 toe 文件读取。
 \newcommand\tableofengcontents{%好像不是很完整
@@ -904,7 +966,7 @@
     \engcontentsname
     \@mkboth{\engcontentsname}{\engcontentsname}%
   }
-  \addcontentsline{toc}{chapter}{TABLE OF CONTENTS}
+  \addcontentsline{toc}{chapter}{\DUT@label@contents@en}
   \@starttoc{toe}%
   \if@restonecol\twocolumn\fi
 }
@@ -915,10 +977,10 @@
 \renewenvironment{thebibliography}[1]%%缩进好像不对
   {%
     \songti\zihao{5}
-    \chapter*{参~~考~~文~~献}
+    \chapter*{\DUT@label@reference@title}
     \@mkboth{\MakeUppercase\bibname}{\MakeUppercase\bibname}%
-    \addcontentsline{toc}{chapter}{参考文献}
-    \addcontentsline{toe}{chapter}{References}
+    \addcontentsline{toc}{chapter}{\DUT@label@reference}
+    \addcontentsline{toe}{chapter}{\DUT@label@references@en}
     \list{\@biblabel{\@arabic\c@enumiv}}%效果如[1][2]
       {%
         \settowidth\labelwidth{\@biblabel{#1}}%测量最大标签宽度，例如[99]，并将结果存储在 \labelwidth 中
@@ -958,9 +1020,9 @@
       \phantom{s}
       \thispagestyle{empty}
     \fi
-    \chapter*{攻读硕士学位期间科研项目及科研成果}%要改成变量形式
-    \addcontentsline{toc}{chapter}{攻读硕士学位期间科研项目及科研成果}
-    \addcontentsline{toe}{chapter}{Achievements}
+    \chapter*{\DUT@label@publications}
+    \addcontentsline{toc}{chapter}{\DUT@label@publications}
+    \addcontentsline{toe}{chapter}{\DUT@label@publications@en}
   }
   {}
 
@@ -999,9 +1061,9 @@
       \phantom{s}
       \thispagestyle{empty}
     \fi
-    \chapter*{作者简介}
-    \addcontentsline{toc}{chapter}{作者简介}
-    \addcontentsline{toe}{chapter}{CV}
+    \chapter*{\DUT@label@resume}
+    \addcontentsline{toc}{chapter}{\DUT@label@resume}
+    \addcontentsline{toe}{chapter}{\DUT@label@resume@en}
   }
   {}
 
@@ -1031,9 +1093,9 @@
 %% 结论环境：无编号章节，但加入目录。
 \newenvironment{conclusion}
   {%
-    \chapter*{结论}
-    \@mkboth{结论}{结论}%
-    \addcontentsline{toc}{chapter}{结论}
+    \chapter*{\DUT@label@conclusion}
+    \@mkboth{\DUT@label@conclusion}{\DUT@label@conclusion}%
+    \addcontentsline{toc}{chapter}{\DUT@label@conclusion}
   }
   {}
 
@@ -1046,9 +1108,9 @@
       \phantom{s}
       \thispagestyle{empty}
     \fi
-    \chapter*{致~~~~~~谢}
-    \addcontentsline{toc}{chapter}{致谢}
-    \addcontentsline{toe}{chapter}{Acknowledgements}
+    \chapter*{\DUT@label@thanks@title}
+    \addcontentsline{toc}{chapter}{\DUT@label@thanks}
+    \addcontentsline{toe}{chapter}{\DUT@label@thanks@en}
   }
   {}
 
@@ -1062,7 +1124,7 @@
 
 %% 主要符号表环境
 \newenvironment{denotation}
-  {\chapter{主要符号表}}
+  {\chapter{\DUT@label@denotation}}
   {}
 
 %% =================================================================
@@ -1078,3 +1140,4 @@
 \endinput
 %%
 %% End of file `dutmaster-xetex.cls'.
+
