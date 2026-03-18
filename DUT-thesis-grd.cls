@@ -18,19 +18,6 @@
 %% =================================================================
 
 
-%% =================================================================
-%% 引用宏包
-%% =================================================================
-\RequirePackage{amsmath,amsthm,amsfonts,amssymb,bm,mathrsfs}%% 这一组宏包提供公式、定理、符号、粗体数学符号等基础能力。可能与 xunicode 存在兼容性注意事项，因此集中放在文件开头。
-\RequirePackage{upgreek}  %% 提供直立希腊字母，例如 \upalpha、\upbeta
-\RequirePackage{xstring}  %% 提供字符串长度计算
-\RequirePackage{forloop}  %% 提供循环输出功能
-\RequirePackage{ulem}    %% 提供下划线等文本强调命令
-\RequirePackage{tikz}
-\RequirePackage{etoolbox}
-\RequirePackage{pifont}
-\RequirePackage{setspace}
-%%原文有个\usepackage{titlesec}暂时不懂要不要放在这
 
 %% =================================================================
 %% LaTeX 类文件基础声明
@@ -75,6 +62,59 @@
 \else
   \LoadClass[zihao=-4,a4paper,oneside,openany,UTF8,space=auto]{ctexbook}
 \fi
+
+%% =================================================================
+%% 引用宏包（集中管理）
+%% =================================================================
+\RequirePackage{amsmath,amsthm,amsfonts,amssymb,bm,mathrsfs} %% 数学公式/定理/符号/黑体
+\RequirePackage{upgreek}                               %% 直立希腊字母
+\RequirePackage{xstring}                               %% 字符串拆分/判断
+\RequirePackage{forloop}                               %% 循环生成内容
+\RequirePackage{ulem}                                  %% 下划线/删除线
+\RequirePackage{tikz}                                  %% 画圈字符
+\RequirePackage{etoolbox}                              %% 条件判断补丁
+\RequirePackage{pifont}                                %% 符号集
+\RequirePackage{setspace}                              %% 行距控制
+\RequirePackage{xltxtra}                               %% XeLaTeX 字体支持
+\RequirePackage{graphicx}                              %% 插图
+\RequirePackage{subfigure}                             %% 并列子图
+\RequirePackage{makecell}                              %% 单元格内换行
+\RequirePackage{wrapfig}                               %% 文字环绕图
+\RequirePackage{threeparttable}                        %% 三线表注释
+\RequirePackage{dcolumn}                               %% 小数点对齐
+\RequirePackage{multirow}                              %% 多行单元格
+\RequirePackage{booktabs}                              %% 表格横线
+\RequirePackage{tabularx}                              %% 自适应列宽
+\RequirePackage[justification=centering]{caption}      %% 图表题注格式
+\RequirePackage[list=off]{bicaption}                   %% 双语题注
+\RequirePackage[numbers,square,comma,sort&compress]{natbib} %% 引用样式
+\RequirePackage{xcolor}                                %% 颜色
+\RequirePackage{float}                                 %% 强制浮动位置
+\RequirePackage{listings}                              %% 代码环境
+\RequirePackage{algorithm}                             %% 算法浮动体
+\RequirePackage{algorithmicx}                          %% 算法排版
+\RequirePackage{algpseudocode}                         %% 伪代码样式
+\RequirePackage{enumitem}                              %% 枚举间距
+\RequirePackage{supertabular}                          %% 跨页表格
+\RequirePackage{titlesec}                              %% 标题格式
+\RequirePackage{titletoc}                              %% 目录格式
+\RequirePackage{ifthen}                                %% 条件判断
+\RequirePackage{ifpdf}                                 %% 输出模式判断
+\RequirePackage{fancyhdr}                              %% 页眉页脚
+\RequirePackage[version=4]{mhchem}                     %% 化学式排版
+\RequirePackage{siunitx}                               %% 物理单位
+%% geometry 统一版面参数
+\RequirePackage[
+  paper=a4paper,
+  top=3.5cm,
+  bottom=2.5cm,
+  left=2.7cm,
+  right=2.7cm,
+  headheight=0.50cm,
+  footskip=1.47cm
+]{geometry}                                            %% 版芯与页边距
+%% hyperref 放在最后
+\RequirePackage{hyperref}                              %% 书签/超链接
 
 %% =================================================================
 %% 定义函数
@@ -296,37 +336,8 @@
 \newcommand{\version}{\DUT@value@templateversion}
 
 %% =================================================================
-%% 兼容旧接口（避免主文件立即报错）
-%% =================================================================
-\newcommand\titleone[1]{\committeeTitleOne{#1}}
-\newcommand\titletwo[1]{\committeeTitleTwo{#1}}
-\newcommand\titlethree[1]{\committeeTitleThree{#1}}
-\newcommand\titlefour[1]{\committeeTitleFour{#1}}
-\newcommand\titlefive[1]{\committeeTitleFive{#1}}
-\newcommand\profone[1]{\committeeMemberOne{#1}}
-\newcommand\proftwo[1]{\committeeMemberTwo{#1}}
-\newcommand\profthree[1]{\committeeMemberThree{#1}}
-\newcommand\proffour[1]{\committeeMemberFour{#1}}
-\newcommand\proffive[1]{\committeeMemberFive{#1}}
-\newcommand\dabianren[1]{\defenseCandidate{#1}}
-\newcommand\where[1]{\defenseLocation{#1}}
-\newcommand\UDC[1]{\udc{#1}}
-
-%% =================================================================
 %% 版面设置与基础排版控制
 %% =================================================================
-%% 使用 geometry 统一设置纸张尺寸与版芯。
-%% 当前模板采用 A4 纸，边距参数为：
-%% 上 3.5 cm，下 2.5 cm，左/右 2.7 cm，页眉高度 0.5 cm，页脚间距 1.47 cm。
-\usepackage[
-  paper=a4paper,
-  top=3.5cm,
-  bottom=2.5cm,
-  left=2.7cm,
-  right=2.7cm,
-  headheight=0.50cm,
-  footskip=1.47cm
-]{geometry}
 
 % %% 在双面模式下，重定义 \cleardoublepage：？？？？？？？？？？？？？？？？？？没懂
 % %% 如果当前页是偶数页，则插入一个真正的空白页，并取消页眉页脚。
@@ -371,7 +382,6 @@
   afterskip  = 6bp,
   fixskip    = true,
 }}
-\usepackage{titlesec}%% 加载 titlesec 并定义三级标题格式。？？？？？？？这能放在这吗
 \ctexset{subsubsection={
   name       = {(,)},
   number     = {\arabic{subsubsection}},
@@ -390,7 +400,6 @@
 \addtocontents{lot}{\protect\hypersetup{hidelinks}}%表目录
 \addtocontents{lof}{\protect\hypersetup{hidelinks}}%图目录
 
-\RequirePackage{titletoc}%%目录样式宏包？？？？？？？？？？？这个宏包为什么不能放在文件开头
 %% 使用 titletoc 调整目录条目缩进、点线与页码对齐方式。
 \titlecontents{chapter}[0pt]{\songti\zihao{-4}}
   {\thecontentslabel\hspace{0.1\ccwd}}{}
@@ -432,9 +441,6 @@
 %% =================================================================
 %% 编译模式判断与页眉页脚控制
 %% =================================================================
-\RequirePackage{ifthen}   %% 提供条件判断命令
-\RequirePackage{ifpdf}    %% 判断当前是否为 PDF 输出模式（保留原模板依赖）
-\RequirePackage{fancyhdr} %% 页眉页脚样式控制
 
 %% 定义 DUT@empty 样式：完全清空页眉页脚内容
 \fancypagestyle{DUT@empty}{
@@ -499,10 +505,6 @@
 %% =================================================================
 %% 表格扩展与数学常量、定理环境
 %% =================================================================
-\RequirePackage{threeparttable} %% 三线表注释环境
-\RequirePackage{dcolumn}        %% 小数点对齐列类型
-\RequirePackage{multirow}       %% 多行单元格
-\RequirePackage{booktabs}       %% 更美观的横线命令
 
 %% d 列：按小数点对齐，例如 \begin{tabular}{d{2.3}}
 \newcolumntype{d}[1]{D{.}{.}{#1}}
@@ -534,7 +536,6 @@
 %% =================================================================
 %% 英文字体设置
 %% =================================================================
-\RequirePackage{xltxtra} %% XeLaTeX 扩展，提供字体相关支持
 \setmainfont{Times New Roman}%% 设置正文字体为 Times New Roman
 \setsansfont{Arial}%% 设置无衬线字体为 Arial
 \setmonofont{Courier New}%% 设置等宽字体为 Courier New
@@ -542,20 +543,10 @@
 %% =================================================================
 %% 图片、表格、双语标题与图表题注设置
 %% =================================================================
-\RequirePackage{graphicx}   %% 图形插入
-\RequirePackage{subfigure}  %% 并列子图（保留原模板写法）
-\RequirePackage{makecell}   %% 表格单元格内换行
-\RequirePackage{wrapfig}    %% 文字环绕图片
 
 %% 以下若干宏包与设置用于控制图表标题样式。
 %% 注意：原模板存在重复加载 amsmath / caption / booktabs 的情况；
 %% 为尽量保持原始行为，这里仍然保留这些调用，只做排版与注释整理。
-\RequirePackage{amsmath}
-\RequirePackage{caption}
-\usepackage[list=off]{bicaption}
-\usepackage[justification=centering]{caption}
-\usepackage{booktabs}
-\RequirePackage{tabularx}
 
 %% 图表标题：中文标题与编号间使用一个汉字宽度的间距。
 \DeclareCaptionLabelSeparator{f_t_caption_space}{\hspace{1\ccwd}}%%定义一个汉字宽度的空白。
@@ -592,7 +583,6 @@
 %% 参考文献与浮动体参数
 %% =================================================================
 %% natbib：数字型方括号引用，多个引用自动排序并压缩。
-\RequirePackage[numbers,square,comma,sort&compress]{natbib}
 
 %% 定义上标式引用函数，例如：文字\upcite{ref}
 \newcommand{\upcite}[1]{\textsuperscript{\cite{#1}}}
@@ -611,8 +601,6 @@
 %% =================================================================
 %% 颜色、浮动体与代码环境
 %% =================================================================
-\RequirePackage{xcolor} %% 颜色支持
-\usepackage{float}      %% 提供 [H] 强制浮动位置
 
 %% 中文破折号：通过规则线手工绘制
 \newcommand{\cndash}{%
@@ -620,7 +608,6 @@
 }
 
 %% listings：源码显示环境
-\RequirePackage{listings}
 \lstset{%%？？？？？？？？？？？？等待调整先后顺序
   tabsize            = 4,
   frame              = shadowbox,
@@ -661,10 +648,7 @@
 \renewcommand{\lstlistingname}{\DUT@label@listingname}
 
 %% 算法环境：编号按 chapter 计数
-\newcounter{algorithm}[chapter]
-\usepackage{algorithm}%% 算法浮动体环境
-\usepackage{algorithmicx}%%算法排版宏包
-\usepackage{algpseudocode}%%伪代码风格宏包
+\@ifundefined{c@algorithm}{\newcounter{algorithm}[chapter]}{}
 \renewcommand{\algorithmicrequire}{\textbf{\DUT@label@algorithm@input}}
 \renewcommand{\algorithmicensure}{\textbf{\DUT@label@algorithm@output}}
 \renewcommand\thealgorithm{\thechapter.\arabic{algorithm}}%%算法编号格式为“章号.序号”
@@ -672,7 +656,6 @@
 
 %% hyperref package
 
-\RequirePackage{hyperref}
 %\definecolor{navyblue}{RGB}{0,0,128}   %增加海军蓝颜色
 \hypersetup{
   bookmarksnumbered,%
@@ -688,8 +671,6 @@
 }
 
 %% 三种枚举环境间距调节
-\usepackage{enumitem}
-\usepackage{supertabular}%% 允许跨页的表格环境，？？？？？该放在这吗
 \setenumerate[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
 % \setitemize[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=0pt}
 % \setdescription{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
@@ -698,7 +679,6 @@
 %% 参考文献风格与内部辅助命令
 %% =================================================================
 \bibliographystyle{GBT7714-2005NLang}%%？？？？？？？？？？？为何不用2015国标
-\usepackage[numbers,sort&compress]{natbib} %% ？？？？？好像重复了，也使用了不该使用的usepackage关键字，保留原模板的再次加载写法
 
 %% DUTspace：输出若干个汉字宽度的水平空白。
 %% 例如 \DUTspace[2] 表示约两个汉字宽的空格。
@@ -1130,8 +1110,6 @@
 %% =================================================================
 %% 化学式、国际单位与计数器深度设置
 %% =================================================================
-\RequirePackage[version=4]{mhchem} %% 化学式，如 \ce{H2O}
-\RequirePackage{siunitx}           %% 国际单位制，如 \SI{10}{\metre}
 
 %% 章节编号深度与目录显示深度
 \setcounter{secnumdepth}{4}  %% 章节编号的深度细到 subsubsection
