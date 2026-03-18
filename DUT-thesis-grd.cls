@@ -5,7 +5,34 @@
 %%==================================================
 
 %% =================================================================
-%% 本文提供可调用函数：
+%% 本文结构目录（按编号）
+%% 1) 基础声明（内核与类信息）
+%% 2) 类选项（主文件可传入的选项）
+%% 3) 选项变量（控制模板行为）
+%% 3.1 变量声明与默认值
+%% 3.2 选项解析与处理
+%% 4) 加载父类（ctexbook）
+%% 5) 宏包加载（集中管理）
+%% 6) 固定文本与默认值（label / value）
+%% 6.1 封面（label / value）
+%% 6.2 声明（label / value）
+%% 6.3 委员会（label / value）
+%% 6.4 未使用变量（label / value）
+%% 7) 主文件接口（供 MAIN.tex 调用）
+%% 7.1 封面接口
+%% 7.2 声明接口
+%% 7.3 委员会接口
+%% 7.4 未使用变量接口
+%% 8) 版面与标题样式（全局排版规则）
+%% 8.1 行距与标题层级
+%% 8.2 目录样式与双语目录接口
+%% 8.3 页眉页脚样式
+%% 8.4 双面空白页控制（openright）
+%% 8.5 前置/正文页码风格
+%% 9) 表格、数学常量与定理环境
+%% 9.1 表格列类型扩展
+%% 9.2 常用数学常量
+%% 9.3 定理与证明环境
 %% =================================================================
 
 %% =================================================================
@@ -33,6 +60,7 @@
 %% =====================================================================
 %% 2) 类选项（主文件可传入的选项）
 %% =====================================================================
+%% 未知选项转交给 ctexbook
 %% 用途：把未知选项传给 ctexbook（如字号、纸张等）
 %% 用法：\documentclass[12pt,a4paper]{DUT-thesis-grd}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{ctexbook}}
@@ -40,6 +68,7 @@
 %% =====================================================================
 %% 3) 选项变量（控制模板行为）
 %% =====================================================================
+%% 3.1 变量声明与默认值
 %% 用途：在类内部保存选项状态
 %% 用法：主文件通过 twoside/hide 等选项控制
 \newif\ifDUT@twoside %% 是否启用双面排版
@@ -47,6 +76,9 @@
 \newif\ifDUT@Hidden  %% 是否启用隐藏功能
 \DUT@Hiddenfalse
 
+%% =====================================================================
+%% 3.2 选项解析与处理
+%% =====================================================================
 %% 用途：定义可用选项及其效果
 %% 用法：\documentclass[twoside,hide]{DUT-thesis-grd}
 \DeclareOption{twoside}{\DUT@twosidetrue}
@@ -71,6 +103,7 @@
 %% =====================================================================
 %% 5) 宏包加载（集中管理）
 %% =====================================================================
+%% 5) 依赖包清单（按功能分组）
 %% 用途：统一维护依赖，便于调整与排错
 %% 用法：新增包尽量放在此处，并保持注释简洁
 \RequirePackage{amsmath,amsthm,amsfonts,amssymb,bm,mathrsfs} %% 数学公式/定理/符号/黑体
@@ -126,51 +159,24 @@
 %% =====================================================================
 %% 6) 固定文本与默认值（label / value）
 %% =====================================================================
-%% 用途：集中管理模板固定文字与用户可填内容
+%% 6.1 封面（label / value）
+%% 用途：封面与正文标题等固定文本与默认值
 %% 用法：label 不建议在主文件改，value 通过接口覆盖
-%% ---- Label: 封面与学位信息 ----
 \def\DUT@label@major{学科、~~专业:}
-\def\DUT@label@title{论文题目}
 \def\DUT@label@author{作~~者~~姓~~名:}
-\def\DUT@label@classification{中图分类号：}
-\def\DUT@label@confidential{密级}
-\def\DUT@label@udc{UDC\!分类号：}
-\def\DUT@label@serialnumber{编号}
-\def\DUT@label@thesis{学位论文}
-\def\DUT@label@advisor{指~~导~~教~~师:}
-\def\DUT@label@degree{申~~~~请~~~~学~~~~位}
-\def\DUT@label@submitdate{论文提交日期}
-\def\DUT@label@defenddate{答~~辩~~日~~期:}
 \def\DUT@label@studentnumber{学~~~~~~~~~~~~~~号:}
-\def\DUT@label@institute{学~~~~院~~~~名~~~~称}
-\def\DUT@label@school{学~位~授~予~单~位}
-\def\DUT@label@chairman{答辩委员会主席}
-
-%% ---- Label: 标题页固定文本 ----
+\def\DUT@label@advisor{指~~导~~教~~师:}
+\def\DUT@label@defenddate{答~~辩~~日~~期:}
 \def\DUT@label@cover@degree{硕士学位论文}
 \def\DUT@label@cover@spec{大连理工大学硕士学位论文格式规范}
 \def\DUT@label@cover@spec@en{Format Criterion of Master Degree Thesis of DUT}
 \def\DUT@label@cover@school{大连理工大学}
 \def\DUT@label@cover@school@en{Dalian University of Technology}
 \def\DUT@label@cover@note{注：对于专业学位硕士,企业或实践导师必填,写法样例:XXX(企业导师)或XXX(实践导师)}
-
-%% ---- Label: 声明与授权 ----
-\def\DUT@label@original{学位论文原创性申明}
-\def\DUT@label@committee{硕士学位论文答辩委员会}
-\def\DUT@label@authorization{大连理工大学学位论文版权使用授权书}
-\def\DUT@label@author@sign{作~~者~~签~~名~~：}
-\def\DUT@label@supervisor@sign{导~~师~~签~~名~~：}
-\def\DUT@label@date{日期：}
-\def\DUT@label@thesistitle{学位论文题目：}
-\def\DUT@label@originalcontent{本人郑重声明：所呈交的学位论文，是本人在导师的指导下，独立进行研究工作所取得的成果。除文中已经指明引用的内容外，学位论文不含任何其他个人、法人或者非法人组织已经发表或尚未发表的作品，且学位论文中已经指明作者姓名或者名称、作品名称的内容，不影响该作品的正常使用，也不存在不合理地损害相关权利人的合法权益的任何情形。对学位论文研究做出重要贡献的个人和法人或者非法人组织，均已在论文中以明确方式标明，且不存在任何著作权纠纷。\par 若因声明不实，本人愿意为此承当相应的法律责任。}
-\def\DUT@label@authorizationcontent{本人完全了解大连理工大学有关学位论文知识产权的规定，在校攻读学位期间论文工作的知识产权属于大连理工大学，允许论文被查阅和借阅。学校有权保留论文并向国家有关部门或机构送交论文的复印件和电子版，可以将本学位论文的全部或部分内容编入有关数据库进行检索，可以采用影印、缩印、或扫描等复制手段保存和汇编本学位论文。}
-
-%% ---- Label: 章节标题与页眉 ----
 \def\DUT@label@abstract{摘要}
 \def\DUT@label@keywords{关键词：}
 \def\DUT@label@englishkeywords{Key Words:~}
 \def\DUT@label@conclusion{结论}
-\def\DUT@label@appendix{附录}
 \def\DUT@label@publications{攻读硕士学位期间科研项目及科研成果}
 \def\DUT@label@projects{攻读学位期间参与的项目}
 \def\DUT@label@resume{作者简介}
@@ -190,19 +196,8 @@
 \def\DUT@label@algorithm@output{Output:}
 \def\DUT@label@figure@en{Fig.}
 \def\DUT@label@table@en{Tab.}
-\def\DUT@label@figure@appendix{附录-图}
-\def\DUT@label@table@appendix{附录-表}
-\def\DUT@label@figure@appendix@en{App.Fig.}
-\def\DUT@label@table@appendix@en{App.Tab.}
 \def\DUT@label@headschoolname{大连理工大学硕士学位论文}
 \def\DUT@label@headspecname{大连理工大学硕士学位论文格式规范}
-\def\DUT@label@bookmark@statement{声明}
-\def\DUT@label@bookmark@committee{委员会}
-\def\DUT@label@committee@candidate{答辩人:}
-\def\DUT@label@committee@members{答辩委员会委员:}
-\def\DUT@label@committee@date{答辩日期:}
-\def\DUT@label@committee@location{答辩地点:}
-\def\DUT@label@committee@chairnote{（注:主席）}
 \def\DUT@label@abstract@en{ABSTRACT}
 \def\DUT@label@contents@en{TABLE OF CONTENTS}
 \def\DUT@label@references@en{References}
@@ -210,27 +205,37 @@
 \def\DUT@label@resume@en{CV}
 \def\DUT@label@thanks@en{Acknowledgements}
 
-%% ---- Value: 封面与学位信息 ----
-\def\DUT@value@classification{分类号}
-\def\DUT@value@confidential{密级}
-\def\DUT@value@udc{UDC分类号}
-\def\DUT@value@serialnumber{编号}
-\def\DUT@value@school{学位授予单位}
-\def\DUT@value@degree{申请学位}
 \def\DUT@value@title{论文题目}
-\def\DUT@value@vtitle{竖排论文题目}
-\def\DUT@value@titlemark{\DUT@value@title}
 \def\DUT@value@author{姓名}
 \def\DUT@value@advisor{导师}
-\def\DUT@value@advisorinstitute{单位}
 \def\DUT@value@major{专业}
 \def\DUT@value@studentnumber{学号}
-\def\DUT@value@submitdate{论文提交日期}
 \def\DUT@value@defenddate{2026年03月18日}
-\def\DUT@value@institute{学院名称}
-\def\DUT@value@chairman{答辩委员会主席}
 
-%% ---- Value: 答辩委员会与安排 ----
+%% 6.2 声明（label / value）
+%% 用途：声明页固定文字
+%% 用法：声明日期由 \DUT@value@defenddate 拆分
+\def\DUT@label@original{学位论文原创性申明}
+\def\DUT@label@authorization{大连理工大学学位论文版权使用授权书}
+\def\DUT@label@author@sign{作~~者~~签~~名~~：}
+\def\DUT@label@supervisor@sign{导~~师~~签~~名~~：}
+\def\DUT@label@date{日期：}
+\def\DUT@label@thesistitle{学位论文题目：}
+\def\DUT@label@originalcontent{本人郑重声明：所呈交的学位论文，是本人在导师的指导下，独立进行研究工作所取得的成果。除文中已经指明引用的内容外，学位论文不含任何其他个人、法人或者非法人组织已经发表或尚未发表的作品，且学位论文中已经指明作者姓名或者名称、作品名称的内容，不影响该作品的正常使用，也不存在不合理地损害相关权利人的合法权益的任何情形。对学位论文研究做出重要贡献的个人和法人或者非法人组织，均已在论文中以明确方式标明，且不存在任何著作权纠纷。\par 若因声明不实，本人愿意为此承当相应的法律责任。}
+\def\DUT@label@authorizationcontent{本人完全了解大连理工大学有关学位论文知识产权的规定，在校攻读学位期间论文工作的知识产权属于大连理工大学，允许论文被查阅和借阅。学校有权保留论文并向国家有关部门或机构送交论文的复印件和电子版，可以将本学位论文的全部或部分内容编入有关数据库进行检索，可以采用影印、缩印、或扫描等复制手段保存和汇编本学位论文。}
+\def\DUT@label@bookmark@statement{声明}
+
+%% 6.3 委员会（label / value）
+%% 用途：答辩委员会页固定文字与默认值
+%% 用法：用于答辩委员会版面
+\def\DUT@label@committee{硕士学位论文答辩委员会}
+\def\DUT@label@committee@candidate{答辩人:}
+\def\DUT@label@committee@members{答辩委员会委员:}
+\def\DUT@label@committee@date{答辩日期:}
+\def\DUT@label@committee@location{答辩地点:}
+\def\DUT@label@committee@chairnote{（注:主席）}
+\def\DUT@label@bookmark@committee{委员会}
+
 \def\DUT@value@committee@titleone{委员职称1}
 \def\DUT@value@committee@titletwo{委员职称2}
 \def\DUT@value@committee@titlethree{委员职称3}
@@ -242,45 +247,69 @@
 \def\DUT@value@committee@proffour{委员4}
 \def\DUT@value@committee@proffive{委员5}
 \def\DUT@value@defense@candidate{答辩人}
-\def\DUT@value@defense@date{答辩日期}
 \def\DUT@value@defense@location{答辩地点}
 
-%% ---- Value: 声明页日期 ----
+%% 6.4 未使用变量（label / value）
+%% 用途：当前类文件未引用，但保留以便扩展
+%% 用法：如需启用，请在正文中显式引用
+\def\DUT@label@appendix{附录}
+\def\DUT@label@chairman{答辩委员会主席}
+\def\DUT@label@classification{中图分类号：}
+\def\DUT@label@confidential{密级}
+\def\DUT@label@degree{申~~~~请~~~~学~~~~位}
+\def\DUT@label@figure@appendix{附录-图}
+\def\DUT@label@figure@appendix@en{App.Fig.}
+\def\DUT@label@institute{学~~~~院~~~~名~~~~称}
+\def\DUT@label@school{学~位~授~予~单~位}
+\def\DUT@label@serialnumber{编号}
+\def\DUT@label@submitdate{论文提交日期}
+\def\DUT@label@table@appendix{附录-表}
+\def\DUT@label@table@appendix@en{App.Tab.}
+\def\DUT@label@thesis{学位论文}
+\def\DUT@label@title{论文题目}
+\def\DUT@label@udc{UDC\!分类号：}
+
+\def\DUT@value@advisorinstitute{单位}
+\def\DUT@value@chairman{答辩委员会主席}
+\def\DUT@value@classification{分类号}
+\def\DUT@value@confidential{密级}
+\def\DUT@value@defense@date{答辩日期}
+\def\DUT@value@degree{申请学位}
+\def\DUT@value@institute{学院名称}
+\def\DUT@value@school{学位授予单位}
+\def\DUT@value@serialnumber{编号}
 \def\DUT@value@statement@year{年}
 \def\DUT@value@statement@month{月}
 \def\DUT@value@statement@day{日}
-
-%% ---- Value: 模板版本 ----
+\def\DUT@value@submitdate{论文提交日期}
 \def\DUT@value@templateversion{v2.0}
+\def\DUT@value@titlemark{\DUT@value@title}
+\def\DUT@value@udc{UDC分类号}
+\def\DUT@value@vtitle{竖排论文题目}
 
 %% =====================================================================
 %% 7) 主文件接口（供 MAIN.tex 调用）
 %% =====================================================================
-%% 用途：主文件通过这些命令填写信息
-%% 用法：示例 \author{姓名}、\defenddate{2026年03月18日}
-%% 封面与学位信息
-\newcommand\classification[1]{\def\DUT@value@classification{#1}}
-\newcommand\studentnumber[1]{\def\DUT@value@studentnumber{#1}}
-\newcommand\confidential[1]{\def\DUT@value@confidential{#1}}
-\newcommand\udc[1]{\def\DUT@value@udc{#1}}
-\newcommand\serialnumber[1]{\def\DUT@value@serialnumber{#1}}
-\newcommand\school[1]{\def\DUT@value@school{#1}}
-\newcommand\degree[1]{\def\DUT@value@degree{#1}}
+%% 7.1 封面接口
+%% 用途：主文件填写封面与正文标题信息
+%% 用法：示例 \title{论文题目}、\author{姓名}
 \renewcommand\title[2][\DUT@value@title]{%
   \def\DUT@value@title{#2}%
   \def\DUT@value@titlemark{\MakeUppercase{#1}}%
 }
-\newcommand\vtitle[1]{\def\DUT@value@vtitle{#1}}
 \renewcommand\author[1]{\def\DUT@value@author{#1}}
+\newcommand\studentnumber[1]{\def\DUT@value@studentnumber{#1}}
 \newcommand\advisor[1]{\def\DUT@value@advisor{#1}}
-\newcommand\advisorinstitute[1]{\def\DUT@value@advisorinstitute{#1}}
 \newcommand\major[1]{\def\DUT@value@major{#1}}
-\newcommand\submitdate[1]{\def\DUT@value@submitdate{#1}}
 \newcommand\defenddate[1]{\def\DUT@value@defenddate{#1}}
-\newcommand\institute[1]{\def\DUT@value@institute{#1}}
-\newcommand\chairman[1]{\def\DUT@value@chairman{#1}}
 
-%% 答辩委员会与安排
+%% 7.2 声明接口
+%% 用途：声明日期由 \defenddate 自动拆分
+%% 用法：无需额外接口
+
+%% 7.3 委员会接口
+%% 用途：填写答辩委员会信息
+%% 用法：示例 \committeeMemberOne{姓名}
 \newcommand\committeeTitleOne[1]{\def\DUT@value@committee@titleone{#1}}
 \newcommand\committeeTitleTwo[1]{\def\DUT@value@committee@titletwo{#1}}
 \newcommand\committeeTitleThree[1]{\def\DUT@value@committee@titlethree{#1}}
@@ -294,12 +323,23 @@
 \newcommand\defenseCandidate[1]{\def\DUT@value@defense@candidate{#1}}
 \newcommand\defenseLocation[1]{\def\DUT@value@defense@location{#1}}
 
-%% 声明页日期
+%% 7.4 未使用变量接口
+%% 用途：当前类文件未引用，但保留以便扩展
+%% 用法：如需启用，请在正文中显式引用
+\newcommand\classification[1]{\def\DUT@value@classification{#1}}
+\newcommand\confidential[1]{\def\DUT@value@confidential{#1}}
+\newcommand\udc[1]{\def\DUT@value@udc{#1}}
+\newcommand\serialnumber[1]{\def\DUT@value@serialnumber{#1}}
+\newcommand\school[1]{\def\DUT@value@school{#1}}
+\newcommand\degree[1]{\def\DUT@value@degree{#1}}
+\newcommand\submitdate[1]{\def\DUT@value@submitdate{#1}}
+\newcommand\chairman[1]{\def\DUT@value@chairman{#1}}
+\newcommand\advisorinstitute[1]{\def\DUT@value@advisorinstitute{#1}}
+\newcommand\vtitle[1]{\def\DUT@value@vtitle{#1}}
+\newcommand\institute[1]{\def\DUT@value@institute{#1}}
 \newcommand\statementDateYear[1]{\def\DUT@value@statement@year{#1}}
 \newcommand\statementDateMonth[1]{\def\DUT@value@statement@month{#1}}
 \newcommand\statementDateDay[1]{\def\DUT@value@statement@day{#1}}
-
-%% 版本号
 \newcommand{\version}{\DUT@value@templateversion}
 
 %% =================================================================
@@ -337,37 +377,22 @@
 }
 \robustify{\circled}%%加固画圈函数
 
-%% =================================================================
-%% ctex 宏的重定义：目录、图目录、表目录标题
-%% =================================================================
-\renewcommand\contentsname{\DUT@label@toc}
-\renewcommand\listfigurename{\DUT@label@listfigure}
-\renewcommand\listtablename{\DUT@label@listtable}
+%% =====================================================================
+%% 8) 版面与标题样式（全局排版规则）
+%% =====================================================================
+%% 用途：统一行距与各级标题格式
+%% 用法：一般无需在主文件中修改
 
-%% =================================================================
-%% 版面设置与基础排版控制
-%% =================================================================
+%% =====================================================================
+%% 8.1 行距与标题层级
+%% =====================================================================
 
-% %% 在双面模式下，重定义 \cleardoublepage：？？？？？？？？？？？？？？？？？？没懂
-% %% 如果当前页是偶数页，则插入一个真正的空白页，并取消页眉页脚。
-% \def\cleardoublepage{%
-%   \clearpage
-%   \if@twoside
-%     \ifodd\c@page
-%     \else
-%       \thispagestyle{empty}%
-%       \hbox{}\newpage
-%       \if@twocolumn\hbox{}\newpage\fi
-%     \fi
-%   \fi
-% }
-
-%% 设置全局1.35倍行距。
+%% 用途：设置全文行距
+%% 用法：需要更改时调整此倍率
 \setstretch{1.35}
-%% =================================================================
-%% 标题层级格式（章/节/小节/小小节）
-%% =================================================================
-%% 使用 ctexset 统一设置 chapter/section/subsection/subsubsection 的字号、字体、编号与上下间距。
+
+%% 用途：设置章/节/小节/小小节的格式
+%% 用法：统一在此处改字号、间距、编号样式
 \ctexset{chapter={
   name = {},
   number = {\arabic{chapter}},
@@ -378,6 +403,7 @@
   fixskip    = true,
 }}
 
+%% 用途：节标题格式
 \ctexset{section={
   format     = {\heiti\zihao{4}},
   beforeskip = 12bp,
@@ -385,12 +411,14 @@
   fixskip    = true,
 }}
 
+%% 用途：小节标题格式
 \ctexset{subsection={
   format     = {\raggedright\heiti\zihao{-4}},
   beforeskip = 8bp,
   afterskip  = 6bp,
   fixskip    = true,
 }}
+%% 用途：小小节标题格式
 \ctexset{subsubsection={
   name       = {(,)},
   number     = {\arabic{subsubsection}},
@@ -400,9 +428,18 @@
   fixskip    = true,
 }}
 
+%% =====================================================================
+%% 8.2 目录样式与双语目录接口
+%% =====================================================================
+%% 用途：设置目录/图表目录标题
+%% 用法：如需改名称，修改 label 或此处
+%% ctex 宏的重定义：目录、图目录、表目录标题
 %% =================================================================
-%% 目录、图目录、表目录的书签与排版样式
-%% =================================================================
+\renewcommand\contentsname{\DUT@label@toc}
+\renewcommand\listfigurename{\DUT@label@listfigure}
+\renewcommand\listtablename{\DUT@label@listtable}
+
+%% =====================================================================
 %% 进入目录相关文件时临时关闭超链接边框显示，避免目录中出现彩色方框。
 \addtocontents{toc}{\protect\hypersetup{hidelinks}}%目录
 \addtocontents{toe}{\protect\hypersetup{hidelinks}}%英文目录
@@ -447,9 +484,11 @@
   \addcontentsline{toe}{subsection}{\protect\numberline{\csname thesubsection\endcsname}#2}
 }
 
-%% =================================================================
-%% 编译模式判断与页眉页脚控制
-%% =================================================================
+%% =====================================================================
+%% 8.3 页眉页脚样式
+%% =====================================================================
+%% 用途：统一页眉页脚显示内容
+%% 用法：如需改字样，修改 \DUT@label@headschoolname 等
 
 %% 定义 DUT@empty 样式：完全清空页眉页脚内容
 \fancypagestyle{DUT@empty}{
@@ -464,10 +503,25 @@
   \fancyhead[CE]{\zihao{5}{\songti \DUT@label@headspecname}}%%页眉偶数页
 }
 
-%% =================================================================
-%% 处理 openright 产生的空白页
-%% =================================================================
-%% 目标：双面模式下章节右开时，若自动插入空白页，则该页不显示页眉页脚。
+%% =====================================================================
+%% 8.4 双面空白页控制（openright）
+%% =====================================================================
+%% 用途：双面模式下插入空白页并隐藏页眉页脚
+%% 用法：保持默认即可，需改逻辑时改此处
+
+% %% 示例：在双面模式下重定义 \cleardoublepage
+% %% 若当前页是偶数页，则插入空白页并取消页眉页脚
+% \def\cleardoublepage{%
+%   \clearpage
+%   \if@twoside
+%     \ifodd\c@page
+%     \else
+%       \thispagestyle{empty}%
+%       \hbox{}\newpage
+%       \if@twocolumn\hbox{}\newpage\fi
+%     \fi
+%   \fi
+% }
 
 %% 在双面模式下，重定义 \cleardoublepage：？？？？？？？？？？？？？？？？？？待修改
 %% 如果当前页是偶数页，则插入一个真正的空白页，并取消页眉页脚。
@@ -492,9 +546,11 @@
 }
 \let\cleardoublepage\DUT@clearemptydoublepage%%将 \cleardoublepage 替换为新的 \DUT@clearemptydoublepage，这样在双面模式下自动插入的空白页就不会显示页眉页脚了
 
-%% =================================================================
-%% frontmatter / mainmatter 页码与页眉页脚风格
-%% =================================================================
+%% =====================================================================
+%% 8.5 前置/正文页码风格
+%% =====================================================================
+%% 用途：前置部分罗马数字、正文阿拉伯数字
+%% 用法：保持默认即可
 %% 前置部分：使用大写罗马数字页码。
 \renewcommand{\frontmatter}{
   \if@openright\cleardoublepage\else\clearpage\fi %%根据 openright 选项决定是否强制从右页开始
@@ -511,35 +567,48 @@
   \pagestyle{DUT@headings}
 }
 
-%% =================================================================
-%% 表格扩展与数学常量、定理环境
-%% =================================================================
+%% =====================================================================
+%% 9) 表格、数学常量与定理环境
+%% =====================================================================
+%% 用途：集中管理表格列类型、常用数学符号与定理环境
+%% 用法：通常无需改动，按需微调格式
 
-%% d 列：按小数点对齐，例如 \begin{tabular}{d{2.3}}
+%% =====================================================================
+%% 9.1 表格列类型扩展
+%% =====================================================================
+%% 用途：提供按小数点对齐的列类型 d
+%% 用法：\begin{tabular}{d{2.3}} ... \end{tabular}
 \newcolumntype{d}[1]{D{.}{.}{#1}}
 
-%% 常用数学常量：直立体 e、i、j 以及微分符号 d
+%% =====================================================================
+%% 9.2 常用数学常量
+%% =====================================================================
+%% 用途：直立体 e/i/j 与微分符号 d
+%% 用法：公式中使用 \me \mi \mj \dif
 \newcommand{\me}{\mathrm{e}}
 \newcommand{\mi}{\mathrm{i}}
 \newcommand{\mj}{\mathrm{j}}
 \newcommand{\dif}{\,\mathrm{d}}
 
-%% 定理类环境：按 chapter 编号
+%% =====================================================================
+%% 9.3 定理与证明环境
+%% =====================================================================
+%% 用途：按章编号的定理类环境
+%% 用法：\begin{thm}...\end{thm} 等
 \theoremstyle{definition}
 \newtheorem{algo}{算法~}[chapter]
 \newtheorem{thm}{定理~}[chapter]
 \newtheorem{lem}[thm]{引理~}
 \newtheorem{prop}[thm]{命题~}
 \newtheorem{cor}[thm]{推论~}
-
-\theoremstyle{definition}
 \newtheorem{defn}{定义~}[chapter]
 \newtheorem{conj}{猜想~}[chapter]
 \newtheorem{exmp}{例~}[chapter]
 \newtheorem{rem}{注~}
 \newtheorem{case}{情形~}
 
-%% proof 环境标题改为中文“证明”
+%% 用途：proof 环境标题改为中文
+%% 用法：自动生效，无需调用
 \renewcommand{\proofname}{\bf \DUT@label@proofname}
 
 %% =================================================================
@@ -1127,5 +1196,7 @@
 \endinput
 %%
 %% End of file `dutmaster-xetex.cls'.
+
+
 
 
