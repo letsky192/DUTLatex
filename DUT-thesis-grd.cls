@@ -23,6 +23,7 @@
 %% 7.2 声明接口
 %% 7.3 委员会接口
 %% 7.4 未使用变量接口
+%% 7.5 工具函数与辅助宏
 %% 8) 版面与标题样式（全局排版规则）
 %% 8.1 行距与标题层级
 %% 8.2 目录样式与双语目录接口
@@ -33,15 +34,142 @@
 %% 9.1 表格列类型扩展
 %% 9.2 常用数学常量
 %% 9.3 定理与证明环境
+%% 10) 字体与图表题注
+%% 10.1 英文字体设置
+%% 10.2 图表题注与编号
+%% 10.3 图像扩展名
+%% 11) 参考文献与浮动体参数
+%% 11.1 引用与浮动体比例
+%% 11.2 编号格式
+%% 12) 代码与算法环境
+%% 12.1 中文破折号
+%% 12.2 listings 代码环境
+%% 12.3 算法环境
+%% 13) 超链接与列表间距
+%% 13.1 hyperref 参数
+%% 13.2 枚举环境间距
+%% 14) 辅助宏与元信息
+%% 14.1 参考文献样式
+%% 14.2 DUTspace 空白宏
+%% 14.3 答辩日期拆分
+%% 14.4 类文件版本信息
+%% 14.5 下划线工具
+%% 15) 标题页与前后置环境
+%% 15.1 中文标题页字体
+%% 15.2 中文标题页绘制
+%% 15.3 原创性声明与授权页
+%% 15.4 答辩委员会页
+%% 15.5 摘要与关键词
+%% 15.6 中英文目录
+%% 15.7 参考文献环境
+%% 15.8 后置部分环境
+%% 16) 计数器与目录深度
 %% =================================================================
 
 %% =================================================================
-%% 预备修改内容：改了哪些部分要明确输出给我看。
-%% 1、将所有固定文本改为可覆盖的变量，按照固定表头为label，表头后可修改的为value，并提供接口函数供主文件调用。
-%% 2、函数接口命名规范化，统一使用英文单词，避免中文拼音缩写。
-%% 3、在每行代码后面增加注释说明，明确每个函数的作用、参数含义以及使用方法。
-%% 4、将整个文件的结构顺序和重新调整，符合标准的 LaTeX 类文件编写规范，增强可读性和维护性。
-%% 5、在本文最前面注释区，总结所有本文定义的函数，以及重定义的函数，并按照功能分类进行说明，方便用户查阅和使用。
+%% 正文可用命令与环境索引（按章节/小节）
+%% 说明：采用 .h 头文件风格，仅声明“用法原型”；具体实现见对应章节。
+%%
+%% [7.1 封面接口]
+%%   \title[title_mark]{title}
+%%   \author{author_name}
+%%   \studentnumber{student_id}
+%%   \advisor{advisor_name}
+%%   \major{major_name}
+%%   \defenddate{yyyy年mm月dd日}
+%%
+%% [7.3 委员会接口]
+%%   \committeeTitleOne{title_1} ... \committeeTitleFive{title_5}
+%%   \committeeMemberOne{name_1} ... \committeeMemberFive{name_5}
+%%   \defenseCandidate{candidate_name}
+%%   \defenseLocation{location}
+%%
+%% [7.4 扩展接口（默认未启用）]
+%%   \classification{text}
+%%   \confidential{text}
+%%   \udc{text}
+%%   \serialnumber{text}
+%%   \school{text}
+%%   \degree{text}
+%%   \submitdate{text}
+%%   \chairman{text}
+%%   \advisorinstitute{text}
+%%   \vtitle{text}
+%%   \institute{text}
+%%   \statementDateYear{yyyy}
+%%   \statementDateMonth{mm}
+%%   \statementDateDay{dd}
+%%   \version
+%%
+%% [7.5 工具命令]
+%%   \Anon{text}
+%%   \Hide{text}
+%%   \circled[phantom]{content}
+%%
+%% [8.2 双语目录写入]
+%%   \BiChapter{cn_title}{en_title}
+%%   \BiSection{cn_title}{en_title}
+%%   \BiSubsection{cn_title}{en_title}
+%%
+%% [8.5 页码命令（重定义）]
+%%   \frontmatter
+%%   \mainmatter
+%%
+%% [9.3 定理类环境]
+%%   \begin{algo}...\end{algo}
+%%   \begin{thm}...\end{thm}
+%%   \begin{lem}...\end{lem}
+%%   \begin{prop}...\end{prop}
+%%   \begin{cor}...\end{cor}
+%%   \begin{defn}...\end{defn}
+%%   \begin{conj}...\end{conj}
+%%   \begin{exmp}...\end{exmp}
+%%   \begin{rem}...\end{rem}
+%%   \begin{case}...\end{case}
+%%
+%% [11.1 引用命令]
+%%   \upcite{bib_key}
+%%
+%% [12.1 中文破折号命令]
+%%   \cndash
+%%
+%% [14.2/14.5 辅助命令]
+%%   \DUTspace[n]
+%%   \DUTunderline[width]{content}
+%%
+%% [15.2 标题页命令（重定义）]
+%%   \maketitle
+%%
+%% [15.3 声明页命令]
+%%   \makeDeclareOriginal
+%%
+%% [15.4 委员会页命令]
+%%   \committee
+%%
+%% [15.5 摘要/关键词]
+%%   \begin{abstract}...\end{abstract}
+%%   \begin{englishabstract}...\end{englishabstract}
+%%   \keywords{keywords_cn}
+%%   \englishkeywords{keywords_en}
+%%   \beginatevenpage
+%%
+%% [15.6 目录命令（重定义/新增）]
+%%   \tableofcontents
+%%   \tableofengcontents
+%%
+%% [15.7 参考文献环境（重定义）]
+%%   \begin{thebibliography}{max_label}...\end{thebibliography}
+%%
+%% [15.8 后置部分环境]
+%%   \begin{publications}...\end{publications}
+%%   \begin{projects}{max_label}...\end{projects}
+%%   \begin{resume}...\end{resume}
+%%   \begin{resumesection}{section_title}...\end{resumesection}
+%%   \begin{resumeli}{item_title}...\end{resumeli}
+%%   \begin{conclusion}...\end{conclusion}
+%%   \begin{thanks}...\end{thanks}
+%%   \begin{symbolnote}...\end{symbolnote}
+%%   \begin{denotation}...\end{denotation}
 %% =================================================================
 
 
@@ -342,12 +470,14 @@
 \newcommand\statementDateDay[1]{\def\DUT@value@statement@day{#1}}
 \newcommand{\version}{\DUT@value@templateversion}
 
-%% =================================================================
-%% 定义函数
-%% =================================================================
-\newcounter{Num}%% 定义一个计数器，用于循环输出“×”
+%% =====================================================================
+%% 7.5 工具函数与辅助宏
+%% =====================================================================
+%% 用途：提供匿名/隐藏/画圈等通用功能
+%% 用法：按需在正文或模板内部调用
+\newcounter{Num}%% 计数器：配合 \Anon 输出遮罩
 
-%% 定义匿名函数\Anon{内容}：若启用 hide，则输出与原字符串长度相同数量的“×”，否则输出原字符串
+%% 匿名输出：若启用 hide，输出等长“×”，否则原样输出
 \newcommand{\Anon}[1]{
   \ifDUT@Hidden
     \StrLen{#1}[\StringLen]% 计算输入字符串长度
@@ -357,7 +487,7 @@
   \fi
 }
 
-%% 定义隐藏函数\Hide{内容}：若启用 hide，则输出空白，否则输出原字符串
+%% 隐藏输出：若启用 hide，输出空白，否则原样输出
 \newcommand{\Hide}[1]{
   \ifDUT@Hidden
   \else
@@ -365,9 +495,10 @@
   \fi
 }
 
-\allowdisplaybreaks[4]   %% 允许多行公式在页间尽量自由断页
+%% 允许多行公式在页间尽量自由断页
+\allowdisplaybreaks[4]
 
-%% 定义生成带圈字符函数：圆圈大小参考#1参数，圈里显示#2参数
+%% 画圈字符：可选参数控制圆圈尺寸，必选参数为字符内容
 \newcommand{\circled}[2][]{%
   \tikz[baseline=(char.base)]{%
     \node[shape=circle,draw,inner sep=1pt] (char)
@@ -375,7 +506,8 @@
     \node at (char.center) {\makebox[0pt][c]{#2}};%
   }%
 }
-\robustify{\circled}%%加固画圈函数
+%% 保护 \circled，避免移动参数出错
+\robustify{\circled}
 
 %% =====================================================================
 %% 8) 版面与标题样式（全局排版规则）
@@ -503,6 +635,21 @@
   \fancyhead[CE]{\zihao{5}{\songti \DUT@label@headspecname}}%%页眉偶数页
 }
 
+%% 全局默认页眉页脚与 plain 样式
+%% 用途：为未显式设置的页面提供统一样式
+%% 用法：默认启用 fancy，plain 用于章首页
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{\songti \zihao{5} \DUT@label@headschoolname}
+\fancyfoot[C]{\songti \zihao{5} {\thepage}}
+
+%% plain 样式通常用于章首页
+\fancypagestyle{plain}{
+  \fancyhf{}%
+  \fancyfoot[C]{\songti \zihao{5} \DUT@label@headschoolname}
+  \fancyfoot[C]{\songti \zihao{5} ~---~{\thepage}~---~}
+}
+
 %% =====================================================================
 %% 8.4 双面空白页控制（openright）
 %% =====================================================================
@@ -523,8 +670,8 @@
 %   \fi
 % }
 
-%% 在双面模式下，重定义 \cleardoublepage：？？？？？？？？？？？？？？？？？？待修改
-%% 如果当前页是偶数页，则插入一个真正的空白页，并取消页眉页脚。
+%% 在双面模式下，重定义 \cleardoublepage
+%% 用途：当前页为偶数页时插入空白页并取消页眉页脚
 \def\cleardoublepage{%
   \clearpage
   \if@twoside
@@ -611,35 +758,36 @@
 %% 用法：自动生效，无需调用
 \renewcommand{\proofname}{\bf \DUT@label@proofname}
 
-%% =================================================================
-%% 英文字体设置
-%% =================================================================
-\setmainfont{Times New Roman}%% 设置正文字体为 Times New Roman
-\setsansfont{Arial}%% 设置无衬线字体为 Arial
-\setmonofont{Courier New}%% 设置等宽字体为 Courier New
+%% =====================================================================
+%% 10) 字体与图表题注
+%% =====================================================================
 
-%% =================================================================
-%% 图片、表格、双语标题与图表题注设置
-%% =================================================================
+%% =====================================================================
+%% 10.1 英文字体设置
+%% =====================================================================
+%% 用途：统一英文正文字体/无衬线/等宽字体
+%% 用法：按需替换字体名称
+\setmainfont{Times New Roman}
+\setsansfont{Arial}
+\setmonofont{Courier New}
 
-%% 以下若干宏包与设置用于控制图表标题样式。
-%% 注意：原模板存在重复加载 amsmath / caption / booktabs 的情况；
-%% 为尽量保持原始行为，这里仍然保留这些调用，只做排版与注释整理。
-
-%% 图表标题：中文标题与编号间使用一个汉字宽度的间距。
-\DeclareCaptionLabelSeparator{f_t_caption_space}{\hspace{1\ccwd}}%%定义一个汉字宽度的空白。
-\DeclareCaptionFont{f_t_caption_font}{\songti\zihao{5}}%%定义caption 字体。
-\captionsetup{%%？？？？？？？？？？？？？？？和后面好像可以合并写
+%% =====================================================================
+%% 10.2 图表题注与编号
+%% =====================================================================
+%% 用途：统一图表题注字体与间距
+%% 用法：修改分隔符/字体即可影响全局题注
+\DeclareCaptionLabelSeparator{f_t_caption_space}{\hspace{1\ccwd}}
+\DeclareCaptionFont{f_t_caption_font}{\songti\zihao{5}}
+\captionsetup{
   font     = {f_t_caption_font},
   labelsep = f_t_caption_space,
 }
 
-%% 图的英文第二标题名称
+%% 用途：设置双语题注中的英文标题名称
 \captionsetup[figure][bi-second]{name=\DUT@label@figure@en}
-%% 表的英文第二标题名称
 \captionsetup[table][bi-second]{name=\DUT@label@table@en}
 
-%% 表标题：置于表格上方
+%% 用途：设置表标题位置与上下间距
 \captionsetup[table]{
   position  = top,
   aboveskip = 6bp,
@@ -647,46 +795,61 @@
 }
 \numberwithin{table}{chapter}
 
-%% 图标题：置于图片下方
+%% 用途：设置图标题位置与上下间距
 \captionsetup[figure]{
   position  = bottom,
   aboveskip = 6bp,
   belowskip = 6bp,
 }
 
-%% 若 \includegraphics 未显式写扩展名，则按下列顺序查找文件。
+%% =====================================================================
+%% 10.3 图像扩展名
+%% =====================================================================
+%% 用途：\includegraphics 未写扩展名时的查找顺序
 \DeclareGraphicsExtensions{.pdf,.eps,.png,.jpg,.jpeg}
 
-%% =================================================================
-%% 参考文献与浮动体参数
-%% =================================================================
-%% natbib：数字型方括号引用，多个引用自动排序并压缩。
+%% =====================================================================
+%% 11) 参考文献与浮动体参数
+%% =====================================================================
 
-%% 定义上标式引用函数，例如：文字\upcite{ref}
+%% =====================================================================
+%% 11.1 引用与浮动体比例
+%% =====================================================================
+%% 用途：定义上标式引用命令
+%% 用法：文字\upcite{ref}
 \newcommand{\upcite}[1]{\textsuperscript{\cite{#1}}}
 
-%% 重定义浮动体参数默认值，减少“图表无法放置”的概率。
+%% 用途：调整浮动体比例，减少“图表无法放置”
 \renewcommand{\textfraction}{0.15}
 \renewcommand{\topfraction}{0.85}
 \renewcommand{\bottomfraction}{0.65}
 \renewcommand{\floatpagefraction}{0.60}
 
-%% 公式、图、表编号格式统一为“章号.序号”，而不是整篇文档从头连续编号。
+%% =====================================================================
+%% 11.2 编号格式
+%% =====================================================================
+%% 用途：统一公式、图、表编号为“章号.序号”
 \renewcommand\theequation{\arabic{chapter}.\arabic{equation}}
 \renewcommand\thefigure{\arabic{chapter}.\arabic{figure}}
 \renewcommand\thetable{\arabic{chapter}.\arabic{table}}
 
-%% =================================================================
-%% 颜色、浮动体与代码环境
-%% =================================================================
+%% =====================================================================
+%% 12) 代码与算法环境
+%% =====================================================================
 
-%% 中文破折号：通过规则线手工绘制
+%% =====================================================================
+%% 12.1 中文破折号
+%% =====================================================================
+%% 用途：绘制中文破折号
 \newcommand{\cndash}{%
   \rule{0.0em}{0pt}\rule[0.35em]{1.4em}{0.05em}\rule{0.2em}{0pt}%
 }
 
-%% listings：源码显示环境
-\lstset{%%？？？？？？？？？？？？等待调整先后顺序
+%% =====================================================================
+%% 12.2 listings 代码环境
+%% =====================================================================
+%% 用途：统一代码块显示样式
+\lstset{
   tabsize            = 4,
   frame              = shadowbox,
   commentstyle       = \color{red!50!green!50!blue!50},
@@ -722,19 +885,26 @@
   numbersep          = 1.5em,
 }
 
-%% listings 标题名称改为“代码”
+%% 用途：代码环境标题名称
 \renewcommand{\lstlistingname}{\DUT@label@listingname}
 
-%% 算法环境：编号按 chapter 计数
+%% =====================================================================
+%% 12.3 算法环境
+%% =====================================================================
+%% 用途：算法环境编号与输入/输出标签
 \@ifundefined{c@algorithm}{\newcounter{algorithm}[chapter]}{}
 \renewcommand{\algorithmicrequire}{\textbf{\DUT@label@algorithm@input}}
 \renewcommand{\algorithmicensure}{\textbf{\DUT@label@algorithm@output}}
 \renewcommand\thealgorithm{\thechapter.\arabic{algorithm}}%%算法编号格式为“章号.序号”
 
+%% =====================================================================
+%% 13) 超链接与列表间距
+%% =====================================================================
 
-%% hyperref package
-
-%\definecolor{navyblue}{RGB}{0,0,128}   %增加海军蓝颜色
+%% =====================================================================
+%% 13.1 hyperref 参数
+%% =====================================================================
+%% 用途：PDF 书签与链接显示风格
 \hypersetup{
   bookmarksnumbered,%
   linktoc=all,
@@ -748,21 +918,36 @@
   pdfstartview=FitH
 }
 
-%% 三种枚举环境间距调节
+%% =====================================================================
+%% 13.2 枚举环境间距
+%% =====================================================================
+%% 用途：统一 enumerate/itemize/description 间距
 \setenumerate[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
 % \setitemize[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=0pt}
 % \setdescription{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+ 
+%% =====================================================================
+%% 14) 辅助宏与元信息
+%% =====================================================================
 
-%% =================================================================
-%% 参考文献风格与内部辅助命令
-%% =================================================================
-\bibliographystyle{GBT7714-2005NLang}%%？？？？？？？？？？？为何不用2015国标
+%% =====================================================================
+%% 14.1 参考文献样式
+%% =====================================================================
+%% 用途：统一参考文献样式（国标）
+\bibliographystyle{GBT7714-2005NLang}
 
-%% DUTspace：输出若干个汉字宽度的水平空白。
-%% 例如 \DUTspace[2] 表示约两个汉字宽的空格。
-\newcommand{\DUTspace}[1][1]{\hspace{#1\ccwd}}%%？？？？？？？？？感觉可以复用到图表标题
+%% =====================================================================
+%% 14.2 DUTspace 空白宏
+%% =====================================================================
+%% 用途：输出若干个汉字宽度的水平空白
+%% 用法：\DUTspace[2] 表示约两个汉字宽空格
+\newcommand{\DUTspace}[1][1]{\hspace{#1\ccwd}}
 
-%% 从 \DUT@value@defenddate 中拆分 年/月/日（格式示例：2023年05月30日）
+%% =====================================================================
+%% 14.3 答辩日期拆分
+%% =====================================================================
+%% 用途：从 \DUT@value@defenddate 拆分 年/月/日
+%% 用法：在声明页生成前调用
 \newcommand{\DUT@splitdefenddate}{%
   \def\DUT@defend@year{\DUT@value@defenddate}%
   \def\DUT@defend@month{}%
@@ -774,9 +959,11 @@
   }{}%
 }
 
-%% 提取类文件版本信息。不是给正文内容服务的，而是给模板自身的元信息服务。
-%% 这里保留了历史兼容逻辑：名称仍然沿用旧模板中的 dutmaster-xetex.cls。
-\def\DUT@getfileinfo#1 #2 #3\relax#4\relax{%%字符拆解器：将输入字符串按空格拆解为三部分，分别赋值给 #1、#2、#3，直到遇到 \relax 结束。
+%% =====================================================================
+%% 14.4 类文件版本信息
+%% =====================================================================
+%% 用途：提取类文件版本信息供模板自身使用
+\def\DUT@getfileinfo#1 #2 #3\relax#4\relax{%
   \def\DUTfiledate{#1}%
   \def\DUTfileversion{#2}%
   \def\DUTfileinfo{#3}%
@@ -788,29 +975,40 @@
 \fi
 \expandafter\DUT@getfileinfo\reserved@a\relax? ? \relax\relax
 
-%% 定义\DUTunderline居中下划线函数：在指定宽度内居中放置内容，再整体加下划线。
+%% =====================================================================
+%% 14.5 下划线工具
+%% =====================================================================
+%% 用途：在指定宽度内居中下划线
 \def\DUT@underline[#1]#2{%
   \underline{\hbox to #1{\hfill#2\hfill}}%
 }
-\def\DUTunderline{\@ifnextchar[\DUT@underline\underline}%%\@ifnextchar为3目运算符，如果下一个字符是[，则调用\DUT@underline，否则调用\underline
+%% 用途：带可选宽度参数的下划线
+\def\DUTunderline{\@ifnextchar[\DUT@underline\underline}
 
-%% =================================================================
-%% 中文标题页绘制
-%% =================================================================
-%% 这里定义行楷字体族，并且简化了使用方式，例如 \xkai{大连理工大学} 就可以直接输出行楷字体的校名。
+%% =====================================================================
+%% 15) 标题页与前后置环境
+%% =====================================================================
+
+%% =====================================================================
+%% 15.1 中文标题页字体
+%% =====================================================================
+%% 用途：行楷字体族定义
 \setCJKfamilyfont{xkai}{STXingkai}
 \newcommand{\xkai}{\CJKfamily{xkai}}
 
-%% 重定义绘制中文标题页。
-%% 注意：当前页面中的若干占位文字、签名图片路径等都沿用原模板写法。
+%% =====================================================================
+%% 15.2 中文标题页绘制
+%% =====================================================================
+%% 用途：生成中文封面页
+%% 用法：主文件调用 \maketitle
 \renewcommand\maketitle{%
   \cleardoublepage
   \thispagestyle{empty}
 
   \begin{center}
     \vskip \stretch{1}%垂直方向上放可伸缩空白
-    \def\tabcolsep{1pt}%调整表格的，好像没用上，难道在答辩委员会的地方用上了吗，这段语句生效到那个地方吗
-    \def\arraystretch{1.5}%调整表格行高好像没用上
+    \def\tabcolsep{1pt}%表格列间距（局部）
+    \def\arraystretch{1.5}%表格行高（局部）
 
     \parbox[t][4.40cm][c]{\textwidth}{%
       \begin{center}
@@ -843,15 +1041,17 @@
 
   \vskip \stretch{0.5}%垂直方向上放可伸缩空白
   \clearpage%清页
-  \if@twoside%如果是双面模式，则插入一个空白页，并且该页不显示页眉页脚。
+  \if@twoside%双面模式下插入空白页
     \thispagestyle{empty}
     \cleardoublepage
   \fi
 }
 
-%% =================================================================
-%% 原创性声明与版权授权页绘制：与中文标题页的使用beginend有何区别，可以改写成一样的吗
-%% =================================================================
+%% =====================================================================
+%% 15.3 原创性声明与授权页
+%% =====================================================================
+%% 用途：生成原创性声明与授权页
+%% 用法：主文件调用 \makeDeclareOriginal
 \newcommand\makeDeclareOriginal{%
   \cleardoublepage
   \pdfbookmark[0]{\DUT@label@bookmark@statement}{statement}%pdf加书签“声明”，内部锚点为statement
@@ -900,9 +1100,11 @@
   \fi
 }
 
-%% =================================================================
-%% 定义生成答辩委员会信息页函数
-%% =================================================================
+%% =====================================================================
+%% 15.4 答辩委员会页
+%% =====================================================================
+%% 用途：生成答辩委员会信息页
+%% 用法：主文件调用 \committee
 \newcommand\committee{%
   \cleardoublepage
   \pdfbookmark[0]{\DUT@label@bookmark@committee}{council}
@@ -942,25 +1144,11 @@
   \fi
 }
 
-%% =================================================================
-%% 全局页眉页脚默认样式与 plain 样式
-%% =================================================================
-\pagestyle{fancy}%%这不是跟前面重合了吗，前面不是定义了DUT@headings样式吗，这里为什么又设置成fancy了，感觉可以合并成一个
-\fancyhf{}
-\fancyhead[C]{\songti \zihao{5} \DUT@label@headschoolname}
-\fancyfoot[C]{\songti \zihao{5} {\thepage}}
-
-%% plain 样式通常用于章首页。
-\fancypagestyle{plain}{%好像没有生效
-  \fancyhf{}%
-  \fancyfoot[C]{\songti \zihao{5} \DUT@label@headschoolname}
-  \fancyfoot[C]{\songti \zihao{5} ~---~{\thepage}~---~}%% 首页页脚格式
-}
-
-%% =================================================================
-%% 摘要、关键词与偶数页起始控制
-%% =================================================================
-%% 中文摘要环境
+%% =====================================================================
+%% 15.5 摘要与关键词
+%% =====================================================================
+%% 用途：定义中英文摘要与关键词环境
+%% 用法：\begin{abstract}...\end{abstract}
 \newenvironment{abstract}
   {%
     \cleardoublepage
@@ -968,8 +1156,8 @@
   }
   {}
 
-%% 强制从偶数页（左页）开始后续内容。
-\newcommand\beginatevenpage{%怎么又来一个奇偶页控制
+%% 用途：强制从偶数页（左页）开始后续内容
+\newcommand\beginatevenpage{%
   \clearpage
   \if@twoside
     \thispagestyle{empty}
@@ -983,7 +1171,7 @@
 }
 
 %% 英文摘要环境
-\newenvironment{englishabstract}%%
+\newenvironment{englishabstract}
   {%
     \clearpage
     \chapter{\DUT@label@abstract@en}
@@ -995,10 +1183,10 @@
   \vspace{2ex}\indent{\bf\zihao{-4} \DUT@label@englishkeywords} #1%
 }
 
-%% =================================================================
-%% 重定义中英文目录命令
-%% =================================================================
-%% 中文目录：写入 toc，并生成 PDF 书签。
+%% =====================================================================
+%% 15.6 中英文目录
+%% =====================================================================
+%% 用途：重定义中英文目录命令
 \renewcommand\tableofcontents{%
   \if@twocolumn% 如果是双栏排版
     \@restonecoltrue\onecolumn% 切换到单栏模式以生成目录，并使@restonecol标志为 true，以便后续恢复双栏模式
@@ -1007,7 +1195,7 @@
   \fi
   \chapter*{\DUT@label@toc@title}% 章标题不编号，但显示“目录”
   \addcontentsline{toc}{chapter}{\contentsname}%将目录添加到 toc 中
-  \@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}%%设置页眉左右两侧的文本为大写的“目录”，正文里好像没有显现
+  \@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}%%设置页眉左右两侧的文本为大写“目录”
   \pdfbookmark[0]{\contentsname}{bittoc}
   \@starttoc{toc}% 从 toc 文件读取目录内容并生成目录
   \if@restonecol\twocolumn\fi
@@ -1017,8 +1205,8 @@
 \def\engcontentsname{\DUT@label@contents@en}
 \renewcommand\engcontentsname{\bf\zihao{-3} \hfill \DUT@label@contents@en \hfill}
 
-%% 英文目录：从 toe 文件读取。
-\newcommand\tableofengcontents{%好像不是很完整
+%% 英文目录：从 toe 文件读取
+\newcommand\tableofengcontents{%
   \@restonecolfalse
   \chapter*{%
     \engcontentsname
@@ -1029,10 +1217,11 @@
   \if@restonecol\twocolumn\fi
 }
 
-%% =================================================================
-%% 重定义参考文献环境
-%% =================================================================
-\renewenvironment{thebibliography}[1]%%缩进好像不对
+%% =====================================================================
+%% 15.7 参考文献环境
+%% =====================================================================
+%% 用途：重定义参考文献列表格式
+\renewenvironment{thebibliography}[1]
   {%
     \songti\zihao{5}
     \chapter*{\DUT@label@reference@title}
@@ -1066,10 +1255,10 @@
     \endlist
   }
 
-%% =================================================================
-%% 后置部分：成果、项目、简历、结论、致谢、符号表
-%% =================================================================
-%% 科研成果环境：若当前页不是奇数页，则先补空白页，使新页位置符合模板习惯。
+%% =====================================================================
+%% 15.8 后置部分环境
+%% =====================================================================
+%% 用途：成果/项目/简历/结论/致谢/符号表等环境
 \newenvironment{publications}
   {%
     \ifodd\c@page
@@ -1084,7 +1273,7 @@
   }
   {}
 
-%% 项目环境：样式类似参考文献列表。
+%% 项目环境：样式类似参考文献列表
 \newenvironment{projects}[1]
   {%
     \chapter{\DUT@label@projects}%攻读硕士学位期间科研项目
@@ -1148,7 +1337,7 @@
   }
   {\endlist}
 
-%% 结论环境：无编号章节，但加入目录。
+%% 结论环境：无编号章节，但加入目录
 \newenvironment{conclusion}
   {%
     \chapter*{\DUT@label@conclusion}
@@ -1172,7 +1361,7 @@
   }
   {}
 
-%% 符号说明环境：依赖前文定义的 \DUT@label@symbolnote。
+%% 符号说明环境：依赖前文定义的 \DUT@label@symbolnote
 \newenvironment{symbolnote}
   {%
     \chapter{\DUT@label@symbolnote}
@@ -1185,11 +1374,10 @@
   {\chapter{\DUT@label@denotation}}
   {}
 
-%% =================================================================
-%% 化学式、国际单位与计数器深度设置
-%% =================================================================
-
-%% 章节编号深度与目录显示深度
+%% =====================================================================
+%% 16) 计数器与目录深度
+%% =====================================================================
+%% 用途：控制章节编号深度与目录显示深度
 \setcounter{secnumdepth}{4}  %% 章节编号的深度细到 subsubsection
 \setcounter{tocdepth}{2}     %% 目录显示到 subsection
 
