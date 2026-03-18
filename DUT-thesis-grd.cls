@@ -64,6 +64,7 @@
 %% 15.7 参考文献环境
 %% 15.8 后置部分环境
 %% 16) 计数器与目录深度
+%% 附) 正文可用命令与环境索引（不参与主编号）
 %% =================================================================
 
 %% =================================================================
@@ -76,6 +77,8 @@
 %%   \studentnumber{student_id}
 %%   \advisor{advisor_name}
 %%   \major{major_name}
+%%
+%% [7.2 声明接口]
 %%   \defenddate{yyyy年mm月dd日}
 %%
 %% [7.3 委员会接口]
@@ -91,14 +94,10 @@
 %%   \serialnumber{text}
 %%   \school{text}
 %%   \degree{text}
-%%   \submitdate{text}
 %%   \chairman{text}
 %%   \advisorinstitute{text}
 %%   \vtitle{text}
 %%   \institute{text}
-%%   \statementDateYear{yyyy}
-%%   \statementDateMonth{mm}
-%%   \statementDateDay{dd}
 %%   \version
 %%
 %% [7.5 工具命令]
@@ -110,6 +109,10 @@
 %%   \BiChapter{cn_title}{en_title}
 %%   \BiSection{cn_title}{en_title}
 %%   \BiSubsection{cn_title}{en_title}
+%%
+%% [8.4 清页控制]
+%%   \DUTDisableBlankPage
+%%   \DUTEnableBlankPage
 %%
 %% [8.5 页码命令（重定义）]
 %%   \frontmatter
@@ -231,21 +234,19 @@
 %% =====================================================================
 %% 5) 宏包加载（集中管理）
 %% =====================================================================
-%% 5) 依赖包清单（按功能分组）
+%% 依赖包清单（按功能分组）
 %% 用途：统一维护依赖，便于调整与排错
 %% 用法：新增包尽量放在此处，并保持注释简洁
 \RequirePackage{amsmath,amsthm,amsfonts,amssymb,bm,mathrsfs} %% 数学公式/定理/符号/黑体
 \RequirePackage{upgreek}                               %% 直立希腊字母
 \RequirePackage{xstring}                               %% 字符串拆分/判断
 \RequirePackage{forloop}                               %% 循环生成内容
-\RequirePackage{ulem}                                  %% 下划线/删除线
 \RequirePackage{tikz}                                  %% 画圈字符
 \RequirePackage{etoolbox}                              %% 条件判断补丁
 \RequirePackage{pifont}                                %% 符号集
 \RequirePackage{setspace}                              %% 行距控制
-\RequirePackage{xltxtra}                               %% XeLaTeX 字体支持
 \RequirePackage{graphicx}                              %% 插图
-\RequirePackage{subfigure}                             %% 并列子图
+\RequirePackage{subcaption}                            %% 子图环境
 \RequirePackage{makecell}                              %% 单元格内换行
 \RequirePackage{wrapfig}                               %% 文字环绕图
 \RequirePackage{threeparttable}                        %% 三线表注释
@@ -264,10 +265,7 @@
 \RequirePackage{algpseudocode}                         %% 伪代码样式
 \RequirePackage{enumitem}                              %% 枚举间距
 \RequirePackage{supertabular}                          %% 跨页表格
-\RequirePackage{titlesec}                              %% 标题格式
 \RequirePackage{titletoc}                              %% 目录格式
-\RequirePackage{ifthen}                                %% 条件判断
-\RequirePackage{ifpdf}                                 %% 输出模式判断
 \RequirePackage{fancyhdr}                              %% 页眉页脚
 \RequirePackage[version=4]{mhchem}                     %% 化学式排版
 \RequirePackage{siunitx}                               %% 物理单位
@@ -390,7 +388,6 @@
 \def\DUT@label@institute{学~~~~院~~~~名~~~~称}
 \def\DUT@label@school{学~位~授~予~单~位}
 \def\DUT@label@serialnumber{编号}
-\def\DUT@label@submitdate{论文提交日期}
 \def\DUT@label@table@appendix{附录-表}
 \def\DUT@label@table@appendix@en{App.Tab.}
 \def\DUT@label@thesis{学位论文}
@@ -401,16 +398,10 @@
 \def\DUT@value@chairman{答辩委员会主席}
 \def\DUT@value@classification{分类号}
 \def\DUT@value@confidential{密级}
-\def\DUT@value@defense@date{答辩日期}
 \def\DUT@value@degree{申请学位}
 \def\DUT@value@institute{学院名称}
 \def\DUT@value@school{学位授予单位}
 \def\DUT@value@serialnumber{编号}
-\def\DUT@value@statement@year{年}
-\def\DUT@value@statement@month{月}
-\def\DUT@value@statement@day{日}
-\def\DUT@value@submitdate{论文提交日期}
-\def\DUT@value@templateversion{v2.0}
 \def\DUT@value@titlemark{\DUT@value@title}
 \def\DUT@value@udc{UDC分类号}
 \def\DUT@value@vtitle{竖排论文题目}
@@ -429,11 +420,11 @@
 \newcommand\studentnumber[1]{\def\DUT@value@studentnumber{#1}}
 \newcommand\advisor[1]{\def\DUT@value@advisor{#1}}
 \newcommand\major[1]{\def\DUT@value@major{#1}}
-\newcommand\defenddate[1]{\def\DUT@value@defenddate{#1}}
 
 %% 7.2 声明接口
 %% 用途：声明日期由 \defenddate 自动拆分
-%% 用法：无需额外接口
+%% 用法：示例 \defenddate{2026年03月18日}
+\newcommand\defenddate[1]{\def\DUT@value@defenddate{#1}}
 
 %% 7.3 委员会接口
 %% 用途：填写答辩委员会信息
@@ -460,15 +451,11 @@
 \newcommand\serialnumber[1]{\def\DUT@value@serialnumber{#1}}
 \newcommand\school[1]{\def\DUT@value@school{#1}}
 \newcommand\degree[1]{\def\DUT@value@degree{#1}}
-\newcommand\submitdate[1]{\def\DUT@value@submitdate{#1}}
 \newcommand\chairman[1]{\def\DUT@value@chairman{#1}}
 \newcommand\advisorinstitute[1]{\def\DUT@value@advisorinstitute{#1}}
 \newcommand\vtitle[1]{\def\DUT@value@vtitle{#1}}
 \newcommand\institute[1]{\def\DUT@value@institute{#1}}
-\newcommand\statementDateYear[1]{\def\DUT@value@statement@year{#1}}
-\newcommand\statementDateMonth[1]{\def\DUT@value@statement@month{#1}}
-\newcommand\statementDateDay[1]{\def\DUT@value@statement@day{#1}}
-\newcommand{\version}{\DUT@value@templateversion}
+\newcommand{\version}{\DUTfileversion}
 
 %% =====================================================================
 %% 7.5 工具函数与辅助宏
@@ -550,6 +537,14 @@
   afterskip  = 6bp,
   fixskip    = true,
 }}
+%% titlesec 放在这里是刻意的：原版模板也是在此处加载
+%% 原因是 titlesec 会影响标题间距的计算与生效时机，
+%% 如果把它放到宏包区或更靠前的位置，后面的 \ctexset
+%% 就会按照“titlesec 已经介入”的方式重新计算，导致节标题
+%% 的前后间距与原版不一致（我们之前就遇到过偏大/偏小的问题）。
+%% 因此这里保持“先设 section/subsection，再加载 titlesec，
+%% 最后设 subsubsection”的顺序，以保证间距表现与原版一致。
+\RequirePackage{titlesec}                              %% 标题格式
 %% 用途：小小节标题格式
 \ctexset{subsubsection={
   name       = {(,)},
@@ -646,7 +641,6 @@
 %% plain 样式通常用于章首页
 \fancypagestyle{plain}{
   \fancyhf{}%
-  \fancyfoot[C]{\songti \zihao{5} \DUT@label@headschoolname}
   \fancyfoot[C]{\songti \zihao{5} ~---~{\thepage}~---~}
 }
 
@@ -654,44 +648,29 @@
 %% 8.4 双面空白页控制（openright）
 %% =====================================================================
 %% 用途：双面模式下插入空白页并隐藏页眉页脚
+%% 说明：该逻辑会被后文多处 \cleardoublepage 调用，
+%%       因此只保留一个“权威版本”，避免重复封装导致效果叠加或失效。
 %% 用法：保持默认即可，需改逻辑时改此处
 
-% %% 示例：在双面模式下重定义 \cleardoublepage
-% %% 若当前页是偶数页，则插入空白页并取消页眉页脚
-% \def\cleardoublepage{%
-%   \clearpage
-%   \if@twoside
-%     \ifodd\c@page
-%     \else
-%       \thispagestyle{empty}%
-%       \hbox{}\newpage
-%       \if@twocolumn\hbox{}\newpage\fi
-%     \fi
-%   \fi
-% }
-
-%% 在双面模式下，重定义 \cleardoublepage
-%% 用途：当前页为偶数页时插入空白页并取消页眉页脚
+%% 在双面模式下重定义 \cleardoublepage
+%% 当前页为偶数页时插入空白页，并显式使用 DUT@empty 样式以隐藏页眉页脚
 \def\cleardoublepage{%
   \clearpage
   \if@twoside
     \ifodd\c@page
     \else
-      \thispagestyle{empty}%
+      \thispagestyle{DUT@empty}%
       \hbox{}\newpage
       \if@twocolumn\hbox{}\newpage\fi
     \fi
   \fi
 }
 
-\let\DUT@cleardoublepage\cleardoublepage%%将原始 \cleardoublepage 保存到 \DUT@cleardoublepage 中
-\newcommand{\DUT@clearemptydoublepage}{%%定义新的 \DUT@clearemptydoublepage 命令：先设置该页为 DUT@empty 样式，再调用原始 \cleardoublepage 插入空白页
-  \clearpage{
-    \pagestyle{DUT@empty}
-    \DUT@cleardoublepage
-  }
-}
-\let\cleardoublepage\DUT@clearemptydoublepage%%将 \cleardoublepage 替换为新的 \DUT@clearemptydoublepage，这样在双面模式下自动插入的空白页就不会显示页眉页脚了
+%% 提供主文件开关：需要临时关闭“空白页”时调用
+%% 典型用途：草稿阶段或只想连续排版时（不想插入空白页）
+\let\DUT@cleardoublepage\cleardoublepage
+\newcommand{\DUTDisableBlankPage}{\let\cleardoublepage\clearpage}
+\newcommand{\DUTEnableBlankPage}{\let\cleardoublepage\DUT@cleardoublepage}
 
 %% =====================================================================
 %% 8.5 前置/正文页码风格
@@ -968,11 +947,7 @@
   \def\DUTfileversion{#2}%
   \def\DUTfileinfo{#3}%
 }
-\expandafter\ifx\csname ver@dutmaster-xetex.cls\endcsname\relax
-  \edef\reserved@a{\csname ver@ctextemp_dutmaster-xetex.cls\endcsname}
-\else
-  \edef\reserved@a{\csname ver@dutmaster-xetex.cls\endcsname}
-\fi
+\edef\reserved@a{\csname ver@DUT-thesis-grd.cls\endcsname}
 \expandafter\DUT@getfileinfo\reserved@a\relax? ? \relax\relax
 
 %% =====================================================================

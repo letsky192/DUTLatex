@@ -16,19 +16,37 @@
 	\bicaption{图片}{Picture}  \label{fig4:diagram}
 \end{figure}
 \BiSubsection{两张并列图片的插入}{The Insertion of Two Side-by-side Pictures}
-插入两幅并列子图的例子如图3.2所示。这两个水平并列放置的图共享一个“图标题”，且有各自的小标题，并列子图的功能是使用subfigure宏包提供的。
+插入两幅并列子图的例子如图3.2所示。这两个水平并列放置的图共享一个“图标题”，且有各自的小标题，并列子图的功能是使用subcaption宏包提供的。
 \begin{lstlisting}[caption={插入并列子图代码}]
 \begin{figure}[!ht]
 \centering
-\subfigure[热流耦合数值模拟]{\includegraphics[width=0.45\textwidth]{figures/figure8}}
-\subfigure[热固耦合数值模拟]{\includegraphics[width=0.45\textwidth]{figures/figure9}}
+\begin{subfigure}[b]{0.45\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{figures/figure8}
+  \subcaption{热流耦合数值模拟}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.45\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{figures/figure9}
+  \subcaption{热固耦合数值模拟}
+\end{subfigure}
 \bicaption{数值模拟图像}{Numerical simulation image}
 \end{figure}
 \end{lstlisting}
 \begin{figure}[!ht]
 	\centering
-	\subfigure[热流耦合数值模拟]{\includegraphics[width=0.45\textwidth]{figures/figure8}}
-	\subfigure[热固耦合数值模拟]{\includegraphics[width=0.45\textwidth]{figures/figure9}}
+	\begin{subfigure}[b]{0.45\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{figures/figure8}
+  \subcaption{热流耦合数值模拟}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.45\textwidth}
+  \centering
+  \includegraphics[width=\textwidth]{figures/figure9}
+  \subcaption{热固耦合数值模拟}
+\end{subfigure}
 	\bicaption{数值模拟图像}{Numerical simulation image}
 \end{figure}
 更多关于Latex插图的例子可以参考《\LaTeX 插图指南》。

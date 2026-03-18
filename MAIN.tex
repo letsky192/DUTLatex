@@ -45,9 +45,6 @@
 \defenseLocation{大连理工大学综合教学1号楼301室}
 
 % 声明页日期
-\statementDateYear{年}
-\statementDateMonth{月}
-\statementDateDay{日}
 
 %================ 进入正文 ================
 \begin{document}
@@ -123,7 +120,7 @@
 % 默认 twoside 文档在新章开始时可能会强制从奇数页（右页）开始
 % 这里把 cleardoublepage 临时替换为 clearpage，
 % 这样封面以及目录等会插入空白页而章节之间不会自动插入空白页
-\let\cleardoublepage\clearpage
+\DUTDisableBlankPage
 
 % 按顺序插入各章正文
 % 实际内容分别在 chapters/chapter1.tex ... chapter6.tex
