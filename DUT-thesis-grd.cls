@@ -412,49 +412,49 @@
 %% 7.1 封面接口
 %% 用途：主文件填写封面与正文标题信息
 %% 用法：示例 \title{论文题目}、\author{姓名}
-\renewcommand\title[2][\DUT@value@title]{%
+\renewcommand{\title}[2][\DUT@value@title]{%
   \def\DUT@value@title{#2}%
   \def\DUT@value@titlemark{\MakeUppercase{#1}}%
 }
-\renewcommand\author[1]{\def\DUT@value@author{#1}}
-\newcommand\studentnumber[1]{\def\DUT@value@studentnumber{#1}}
-\newcommand\advisor[1]{\def\DUT@value@advisor{#1}}
-\newcommand\major[1]{\def\DUT@value@major{#1}}
+\renewcommand{\author}[1]{\def\DUT@value@author{#1}}
+\newcommand{\studentnumber}[1]{\def\DUT@value@studentnumber{#1}}
+\newcommand{\advisor}[1]{\def\DUT@value@advisor{#1}}
+\newcommand{\major}[1]{\def\DUT@value@major{#1}}
 
 %% 7.2 声明接口
 %% 用途：声明日期由 \defenddate 自动拆分
 %% 用法：示例 \defenddate{2026年03月18日}
-\newcommand\defenddate[1]{\def\DUT@value@defenddate{#1}}
+\newcommand{\defenddate}[1]{\def\DUT@value@defenddate{#1}}
 
 %% 7.3 委员会接口
 %% 用途：填写答辩委员会信息
 %% 用法：示例 \committeeMemberOne{姓名}
-\newcommand\committeeTitleOne[1]{\def\DUT@value@committee@titleone{#1}}
-\newcommand\committeeTitleTwo[1]{\def\DUT@value@committee@titletwo{#1}}
-\newcommand\committeeTitleThree[1]{\def\DUT@value@committee@titlethree{#1}}
-\newcommand\committeeTitleFour[1]{\def\DUT@value@committee@titlefour{#1}}
-\newcommand\committeeTitleFive[1]{\def\DUT@value@committee@titlefive{#1}}
-\newcommand\committeeMemberOne[1]{\def\DUT@value@committee@profone{#1}}
-\newcommand\committeeMemberTwo[1]{\def\DUT@value@committee@proftwo{#1}}
-\newcommand\committeeMemberThree[1]{\def\DUT@value@committee@profthree{#1}}
-\newcommand\committeeMemberFour[1]{\def\DUT@value@committee@proffour{#1}}
-\newcommand\committeeMemberFive[1]{\def\DUT@value@committee@proffive{#1}}
-\newcommand\defenseCandidate[1]{\def\DUT@value@defense@candidate{#1}}
-\newcommand\defenseLocation[1]{\def\DUT@value@defense@location{#1}}
+\newcommand{\committeeTitleOne}[1]{\def\DUT@value@committee@titleone{#1}}
+\newcommand{\committeeTitleTwo}[1]{\def\DUT@value@committee@titletwo{#1}}
+\newcommand{\committeeTitleThree}[1]{\def\DUT@value@committee@titlethree{#1}}
+\newcommand{\committeeTitleFour}[1]{\def\DUT@value@committee@titlefour{#1}}
+\newcommand{\committeeTitleFive}[1]{\def\DUT@value@committee@titlefive{#1}}
+\newcommand{\committeeMemberOne}[1]{\def\DUT@value@committee@profone{#1}}
+\newcommand{\committeeMemberTwo}[1]{\def\DUT@value@committee@proftwo{#1}}
+\newcommand{\committeeMemberThree}[1]{\def\DUT@value@committee@profthree{#1}}
+\newcommand{\committeeMemberFour}[1]{\def\DUT@value@committee@proffour{#1}}
+\newcommand{\committeeMemberFive}[1]{\def\DUT@value@committee@proffive{#1}}
+\newcommand{\defenseCandidate}[1]{\def\DUT@value@defense@candidate{#1}}
+\newcommand{\defenseLocation}[1]{\def\DUT@value@defense@location{#1}}
 
 %% 7.4 未使用变量接口
 %% 用途：当前类文件未引用，但保留以便扩展
 %% 用法：如需启用，请在正文中显式引用
-\newcommand\classification[1]{\def\DUT@value@classification{#1}}
-\newcommand\confidential[1]{\def\DUT@value@confidential{#1}}
-\newcommand\udc[1]{\def\DUT@value@udc{#1}}
-\newcommand\serialnumber[1]{\def\DUT@value@serialnumber{#1}}
-\newcommand\school[1]{\def\DUT@value@school{#1}}
-\newcommand\degree[1]{\def\DUT@value@degree{#1}}
-\newcommand\chairman[1]{\def\DUT@value@chairman{#1}}
-\newcommand\advisorinstitute[1]{\def\DUT@value@advisorinstitute{#1}}
-\newcommand\vtitle[1]{\def\DUT@value@vtitle{#1}}
-\newcommand\institute[1]{\def\DUT@value@institute{#1}}
+\newcommand{\classification}[1]{\def\DUT@value@classification{#1}}
+\newcommand{\confidential}[1]{\def\DUT@value@confidential{#1}}
+\newcommand{\udc}[1]{\def\DUT@value@udc{#1}}
+\newcommand{\serialnumber}[1]{\def\DUT@value@serialnumber{#1}}
+\newcommand{\school}[1]{\def\DUT@value@school{#1}}
+\newcommand{\degree}[1]{\def\DUT@value@degree{#1}}
+\newcommand{\chairman}[1]{\def\DUT@value@chairman{#1}}
+\newcommand{\advisorinstitute}[1]{\def\DUT@value@advisorinstitute{#1}}
+\newcommand{\vtitle}[1]{\def\DUT@value@vtitle{#1}}
+\newcommand{\institute}[1]{\def\DUT@value@institute{#1}}
 \newcommand{\version}{\DUTfileversion}
 
 %% =====================================================================
@@ -562,9 +562,9 @@
 %% 用法：如需改名称，修改 label 或此处
 %% ctex 宏的重定义：目录、图目录、表目录标题
 %% =================================================================
-\renewcommand\contentsname{\DUT@label@toc}
-\renewcommand\listfigurename{\DUT@label@listfigure}
-\renewcommand\listtablename{\DUT@label@listtable}
+\renewcommand{\contentsname}{\DUT@label@toc}
+\renewcommand{\listfigurename}{\DUT@label@listfigure}
+\renewcommand{\listtablename}{\DUT@label@listtable}
 
 %% =====================================================================
 %% 进入目录相关文件时临时关闭超链接边框显示，避免目录中出现彩色方框。
@@ -620,6 +620,15 @@
 %% 定义 DUT@empty 样式：完全清空页眉页脚内容
 \fancypagestyle{DUT@empty}{
   \fancyhf{}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+%% 同步约束系统 empty 样式，保证所有“空白页”都无页眉页脚
+\fancypagestyle{empty}{
+  \fancyhf{}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
 }
 
 %% 定义 DUT@headings 样式：居中显示文字页眉、页码页脚
@@ -659,9 +668,14 @@
   \if@twoside
     \ifodd\c@page
     \else
-      \thispagestyle{DUT@empty}%
-      \hbox{}\newpage
-      \if@twocolumn\hbox{}\newpage\fi
+      \hbox{}%
+      \thispagestyle{empty}%
+      \newpage
+      \if@twocolumn
+        \hbox{}%
+        \thispagestyle{empty}%
+        \newpage
+      \fi
     \fi
   \fi
 }
@@ -757,17 +771,21 @@
 %% 用法：修改分隔符/字体即可影响全局题注
 \DeclareCaptionLabelSeparator{f_t_caption_space}{\hspace{1\ccwd}}
 \DeclareCaptionFont{f_t_caption_font}{\songti\zihao{5}}
-\captionsetup{
-  font     = {f_t_caption_font},
-  labelsep = f_t_caption_space,
-}
 
 %% 用途：设置双语题注中的英文标题名称
 \captionsetup[figure][bi-second]{name=\DUT@label@figure@en}
 \captionsetup[table][bi-second]{name=\DUT@label@table@en}
 
+%% 用途：统一代码题注（如“代码3.1：xxx”）字体与分隔
+\captionsetup[lstlisting]{
+  font     = {f_t_caption_font},
+  labelsep = f_t_caption_space,
+}
+
 %% 用途：设置表标题位置与上下间距
 \captionsetup[table]{
+  font      = {f_t_caption_font},
+  labelsep  = f_t_caption_space,
   position  = top,
   aboveskip = 6bp,
   belowskip = 6bp,
@@ -776,6 +794,8 @@
 
 %% 用途：设置图标题位置与上下间距
 \captionsetup[figure]{
+  font      = {f_t_caption_font},
+  labelsep  = f_t_caption_space,
   position  = bottom,
   aboveskip = 6bp,
   belowskip = 6bp,
@@ -808,9 +828,9 @@
 %% 11.2 编号格式
 %% =====================================================================
 %% 用途：统一公式、图、表编号为“章号.序号”
-\renewcommand\theequation{\arabic{chapter}.\arabic{equation}}
-\renewcommand\thefigure{\arabic{chapter}.\arabic{figure}}
-\renewcommand\thetable{\arabic{chapter}.\arabic{table}}
+\renewcommand{\theequation}{\arabic{chapter}.\arabic{equation}}
+\renewcommand{\thefigure}{\arabic{chapter}.\arabic{figure}}
+\renewcommand{\thetable}{\arabic{chapter}.\arabic{table}}
 
 %% =====================================================================
 %% 12) 代码与算法环境
@@ -829,39 +849,37 @@
 %% =====================================================================
 %% 用途：统一代码块显示样式
 \lstset{
-  tabsize            = 4,
-  frame              = shadowbox,
-  commentstyle       = \color{red!50!green!50!blue!50},
-  rulesepcolor       = \color{red!20!green!20!blue!20},
-  keywordstyle       = \color{blue!90}\bfseries,
-  showstringspaces   = false,
-  stringstyle        = \ttfamily,
-  keepspaces         = true,
-  breakindent        = 22pt,
-  numbers            = left,
-  stepnumber         = 1,
-  numberstyle        = \tiny,
   basicstyle         = \footnotesize,
+  keywordstyle       = \color{blue!90}\bfseries,
+  commentstyle       = \color{red!50!green!50!blue!50},
+  stringstyle        = \ttfamily,
+  numbers            = left,
+  numberstyle        = \tiny,
+  numbersep          = 1.5em,
+  stepnumber         = 1,
+  frame              = shadowbox,
+  rulesepcolor       = \color{red!20!green!20!blue!20},
+  framextopmargin    = 2pt,
+  framexbottommargin = 2pt,
+  xleftmargin        = 4em,
+  xrightmargin       = 4em,
+  tabsize            = 4,
+  keepspaces         = true,
   showspaces         = false,
-  flexiblecolumns    = true,
+  showstringspaces   = false,
+  columns            = flexible,
+  fontadjust,
   breaklines         = true,
   breakautoindent    = true,
   breakindent        = 4em,
-  aboveskip          = 1em,
-  fontadjust,
   captionpos         = t,
-  framextopmargin    = 2pt,
-  framexbottommargin = 2pt,
   abovecaptionskip   = -3pt,
   belowcaptionskip   = 3pt,
-  xleftmargin        = 4em,
-  xrightmargin       = 4em,
+  aboveskip          = 1em,
   texcl              = true,
   %% 兼顾中文、换行与数学环境输入
   extendedchars      = false,
-  columns            = flexible,
   mathescape         = true,
-  numbersep          = 1.5em,
 }
 
 %% 用途：代码环境标题名称
@@ -874,7 +892,7 @@
 \@ifundefined{c@algorithm}{\newcounter{algorithm}[chapter]}{}
 \renewcommand{\algorithmicrequire}{\textbf{\DUT@label@algorithm@input}}
 \renewcommand{\algorithmicensure}{\textbf{\DUT@label@algorithm@output}}
-\renewcommand\thealgorithm{\thechapter.\arabic{algorithm}}%%算法编号格式为“章号.序号”
+\renewcommand{\thealgorithm}{\thechapter.\arabic{algorithm}}%%算法编号格式为“章号.序号”
 
 %% =====================================================================
 %% 13) 超链接与列表间距
@@ -976,14 +994,12 @@
 %% =====================================================================
 %% 用途：生成中文封面页
 %% 用法：主文件调用 \maketitle
-\renewcommand\maketitle{%
+\renewcommand{\maketitle}{%
   \cleardoublepage
   \thispagestyle{empty}
 
   \begin{center}
     \vskip \stretch{1}%垂直方向上放可伸缩空白
-    \def\tabcolsep{1pt}%表格列间距（局部）
-    \def\arraystretch{1.5}%表格行高（局部）
 
     \parbox[t][4.40cm][c]{\textwidth}{%
       \begin{center}
@@ -1027,7 +1043,7 @@
 %% =====================================================================
 %% 用途：生成原创性声明与授权页
 %% 用法：主文件调用 \makeDeclareOriginal
-\newcommand\makeDeclareOriginal{%
+\newcommand{\makeDeclareOriginal}{%
   \cleardoublepage
   \pdfbookmark[0]{\DUT@label@bookmark@statement}{statement}%pdf加书签“声明”，内部锚点为statement
   \thispagestyle{empty}%无页眉页脚
@@ -1080,7 +1096,7 @@
 %% =====================================================================
 %% 用途：生成答辩委员会信息页
 %% 用法：主文件调用 \committee
-\newcommand\committee{%
+\newcommand{\committee}{%
   \cleardoublepage
   \pdfbookmark[0]{\DUT@label@bookmark@committee}{council}
   \thispagestyle{empty}
@@ -1124,15 +1140,13 @@
 %% =====================================================================
 %% 用途：定义中英文摘要与关键词环境
 %% 用法：\begin{abstract}...\end{abstract}
-\newenvironment{abstract}
-  {%
-    \cleardoublepage
-    \chapter{\DUT@label@abstract}
-  }
-  {}
+\newenvironment{abstract}{%
+  \cleardoublepage
+  \chapter{\DUT@label@abstract}
+}{}
 
 %% 用途：强制从偶数页（左页）开始后续内容
-\newcommand\beginatevenpage{%
+\newcommand{\beginatevenpage}{%
   \clearpage
   \if@twoside
     \thispagestyle{empty}
@@ -1141,20 +1155,18 @@
 }
 
 %% 中文关键词
-\newcommand\keywords[1]{%
+\newcommand{\keywords}[1]{%
   \vspace{2ex}\indent{\heiti\zihao{-4} \DUT@label@keywords} #1%
 }
 
 %% 英文摘要环境
-\newenvironment{englishabstract}
-  {%
-    \clearpage
-    \chapter{\DUT@label@abstract@en}
-  }
-  {}
+\newenvironment{englishabstract}{%
+  \clearpage
+  \chapter{\DUT@label@abstract@en}
+}{}
 
 %% 英文关键词
-\newcommand\englishkeywords[1]{%
+\newcommand{\englishkeywords}[1]{%
   \vspace{2ex}\indent{\bf\zihao{-4} \DUT@label@englishkeywords} #1%
 }
 
@@ -1162,7 +1174,7 @@
 %% 15.6 中英文目录
 %% =====================================================================
 %% 用途：重定义中英文目录命令
-\renewcommand\tableofcontents{%
+\renewcommand{\tableofcontents}{%
   \if@twocolumn% 如果是双栏排版
     \@restonecoltrue\onecolumn% 切换到单栏模式以生成目录，并使@restonecol标志为 true，以便后续恢复双栏模式
   \else
@@ -1171,23 +1183,26 @@
   \chapter*{\DUT@label@toc@title}% 章标题不编号，但显示“目录”
   \addcontentsline{toc}{chapter}{\contentsname}%将目录添加到 toc 中
   \@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}%%设置页眉左右两侧的文本为大写“目录”
-  \pdfbookmark[0]{\contentsname}{bittoc}
+  %% \chapter* 在 hyperref 下会自动生成书签，这里不再手动 \pdfbookmark，避免重复“目录”
   \@starttoc{toc}% 从 toc 文件读取目录内容并生成目录
   \if@restonecol\twocolumn\fi
 }
 
 %% 英文目录标题文本
-\def\engcontentsname{\DUT@label@contents@en}
-\renewcommand\engcontentsname{\bf\zihao{-3} \hfill \DUT@label@contents@en \hfill}
+\newcommand{\DUT@engcontentsname}{\makebox[\textwidth][c]{\bf\zihao{-3}\DUT@label@contents@en}}
 
 %% 英文目录：从 toe 文件读取
-\newcommand\tableofengcontents{%
-  \@restonecolfalse
-  \chapter*{%
-    \engcontentsname
-    \@mkboth{\engcontentsname}{\engcontentsname}%
-  }
+\newcommand{\tableofengcontents}{%
+  \if@twocolumn
+    \@restonecoltrue\onecolumn
+  \else
+    \@restonecolfalse
+  \fi
+  \chapter*{\texorpdfstring{\DUT@engcontentsname}{\DUT@label@contents@en}}
   \addcontentsline{toc}{chapter}{\DUT@label@contents@en}
+  %% 不向 toe 自身写入“目录标题”，避免英文目录正文出现该标题条目
+  \@mkboth{\MakeUppercase\DUT@label@contents@en}{\MakeUppercase\DUT@label@contents@en}
+  %% \chapter* 已自动生成英文目录书签；移除手动书签以避免重复项
   \@starttoc{toe}%
   \if@restonecol\twocolumn\fi
 }
@@ -1196,8 +1211,7 @@
 %% 15.7 参考文献环境
 %% =====================================================================
 %% 用途：重定义参考文献列表格式
-\renewenvironment{thebibliography}[1]
-  {%
+\renewenvironment{thebibliography}[1]{%
     \songti\zihao{5}
     \chapter*{\DUT@label@reference@title}
     \@mkboth{\MakeUppercase\bibname}{\MakeUppercase\bibname}%
@@ -1217,15 +1231,14 @@
         \@openbib@code
         \usecounter{enumiv}%
         \let\p@enumiv\@empty
-        \renewcommand\theenumiv{\@arabic\c@enumiv}%
+        \renewcommand{\theenumiv}{\@arabic\c@enumiv}%
       }%
     \sloppy%断行设置，允许在单词边界处断行，以避免过长的行导致溢出。
     \clubpenalty4000
     \@clubpenalty \clubpenalty
     \widowpenalty4000%
     \sfcode`\.\@m%让句号后的间距处理保持合适状态。
-  }
-  {%
+  }{%
     \def\@noitemerr{\@latex@warning{Empty `thebibliography' environment}}%防止参考文献列表为空时出现错误，改为发出警告。
     \endlist
   }
@@ -1234,120 +1247,102 @@
 %% 15.8 后置部分环境
 %% =====================================================================
 %% 用途：成果/项目/简历/结论/致谢/符号表等环境
-\newenvironment{publications}
-  {%
-    \ifodd\c@page
-    \else
-      \clearpage
-      \phantom{s}
-      \thispagestyle{empty}
-    \fi
-    \chapter*{\DUT@label@publications}
-    \addcontentsline{toc}{chapter}{\DUT@label@publications}
-    \addcontentsline{toe}{chapter}{\DUT@label@publications@en}
-  }
-  {}
+\newenvironment{publications}{%
+  \ifodd\c@page
+  \else
+    \clearpage
+    \phantom{s}
+    \thispagestyle{empty}
+  \fi
+  \chapter*{\DUT@label@publications}
+  \addcontentsline{toc}{chapter}{\DUT@label@publications}
+  \addcontentsline{toe}{chapter}{\DUT@label@publications@en}
+}{}
 
 %% 项目环境：样式类似参考文献列表
-\newenvironment{projects}[1]
-  {%
-    \chapter{\DUT@label@projects}%攻读硕士学位期间科研项目
-    \@mkboth{\MakeUppercase\DUT@label@projects}{\MakeUppercase\DUT@label@projects}%
-    \list{\@biblabel{\@arabic\c@enumiv}}%
-      {%
-        \settowidth\labelwidth{\@biblabel{#1}}%
-        \leftmargin\labelwidth
-        \advance\leftmargin\labelsep
-        \@openbib@code
-        \usecounter{enumiv}%
-        \let\p@enumiv\@empty
-        \renewcommand\theenumiv{\@arabic\c@enumiv}%
-      }%
-    \sloppy
-    \clubpenalty4000
-    \@clubpenalty \clubpenalty
-    \widowpenalty4000%
-    \sfcode`\.\@m
-  }
-  {%
-    \def\@noitemerr{\@latex@warning{Empty `projects' environment}}%
-    \endlist
-  }
+\newenvironment{projects}[1]{%
+  \chapter{\DUT@label@projects}%攻读硕士学位期间科研项目
+  \@mkboth{\MakeUppercase\DUT@label@projects}{\MakeUppercase\DUT@label@projects}%
+  \list{\@biblabel{\@arabic\c@enumiv}}%
+    {%
+      \settowidth\labelwidth{\@biblabel{#1}}%
+      \leftmargin\labelwidth
+      \advance\leftmargin\labelsep
+      \@openbib@code
+      \usecounter{enumiv}%
+      \let\p@enumiv\@empty
+      \renewcommand{\theenumiv}{\@arabic\c@enumiv}%
+    }%
+  \sloppy
+  \clubpenalty4000
+  \@clubpenalty \clubpenalty
+  \widowpenalty4000%
+  \sfcode`\.\@m
+}{%
+  \def\@noitemerr{\@latex@warning{Empty `projects' environment}}%
+  \endlist
+}
 
 %% 作者简介环境
-\newenvironment{resume}
-  {%
-    \ifodd\c@page
-    \else
-      \clearpage
-      \phantom{s}
-      \thispagestyle{empty}
-    \fi
-    \chapter*{\DUT@label@resume}
-    \addcontentsline{toc}{chapter}{\DUT@label@resume}
-    \addcontentsline{toe}{chapter}{\DUT@label@resume@en}
-  }
-  {}
+\newenvironment{resume}{%
+  \ifodd\c@page
+  \else
+    \clearpage
+    \phantom{s}
+    \thispagestyle{empty}
+  \fi
+  \chapter*{\DUT@label@resume}
+  \addcontentsline{toc}{chapter}{\DUT@label@resume}
+  \addcontentsline{toe}{chapter}{\DUT@label@resume@en}
+}{}
 
 %% 简历中的一级小节
-\newenvironment{resumesection}[1]
-  {%
-    {\noindent\normalfont\bfseries #1}%
-    \list{}{\labelwidth\z@ \leftmargin 2\ccwd}%
-    \item\relax
-  }
-  {\endlist}
+\newenvironment{resumesection}[1]{%
+  {\noindent\normalfont\bfseries #1}%
+  \list{}{\labelwidth\z@ \leftmargin 2\ccwd}%
+  \item\relax
+}{\endlist}
 
 %% 简历中的缩进列表项
-\newenvironment{resumeli}[1]
-  {%
-    {\noindent\normalfont\bfseries #1}%
-    \list{}{%
-      \labelwidth\z@
-      \leftmargin 4\ccwd
-      \itemindent -2\ccwd
-      \listparindent\itemindent
-    }%
-    \item\relax
-  }
-  {\endlist}
+\newenvironment{resumeli}[1]{%
+  {\noindent\normalfont\bfseries #1}%
+  \list{}{%
+    \labelwidth\z@
+    \leftmargin 4\ccwd
+    \itemindent -2\ccwd
+    \listparindent\itemindent
+  }%
+  \item\relax
+}{\endlist}
 
 %% 结论环境：无编号章节，但加入目录
-\newenvironment{conclusion}
-  {%
-    \chapter*{\DUT@label@conclusion}
-    \@mkboth{\DUT@label@conclusion}{\DUT@label@conclusion}%
-    \addcontentsline{toc}{chapter}{\DUT@label@conclusion}
-  }
-  {}
+\newenvironment{conclusion}{%
+  \chapter*{\DUT@label@conclusion}
+  \@mkboth{\DUT@label@conclusion}{\DUT@label@conclusion}%
+  \addcontentsline{toc}{chapter}{\DUT@label@conclusion}
+}{}
 
 %% 致谢环境
-\renewenvironment{thanks}
-  {%
-    \ifodd\c@page
-    \else
-      \clearpage
-      \phantom{s}
-      \thispagestyle{empty}
-    \fi
-    \chapter*{\DUT@label@thanks@title}
-    \addcontentsline{toc}{chapter}{\DUT@label@thanks}
-    \addcontentsline{toe}{chapter}{\DUT@label@thanks@en}
-  }
-  {}
+\renewenvironment{thanks}{%
+  \ifodd\c@page
+  \else
+    \clearpage
+    \phantom{s}
+    \thispagestyle{empty}
+  \fi
+  \chapter*{\DUT@label@thanks@title}
+  \addcontentsline{toc}{chapter}{\DUT@label@thanks}
+  \addcontentsline{toe}{chapter}{\DUT@label@thanks@en}
+}{}
 
 %% 符号说明环境：依赖前文定义的 \DUT@label@symbolnote
-\newenvironment{symbolnote}
-  {%
-    \chapter{\DUT@label@symbolnote}
-    \fangsong
-  }
-  {}
+\newenvironment{symbolnote}{%
+  \chapter{\DUT@label@symbolnote}
+  \fangsong
+}{}
 
 %% 主要符号表环境
-\newenvironment{denotation}
-  {\chapter{\DUT@label@denotation}}
-  {}
+\newenvironment{denotation}{\chapter{\DUT@label@denotation}}{}
 
 %% =====================================================================
 %% 16) 计数器与目录深度
