@@ -1,14 +1,7 @@
-%%==================================================
-%% Ma Thesis.tex for DUT Thesis
-%% version: 1.2
-%% last update: Apr 27th, 2022
-%%==================================================
-
 % 使用大连理工大学学位论文模板类
-% 选项说明：
 % twoside = 双面排版
 % hide    = 隐藏某些信息，通常用于盲审/匿名版
-\documentclass[twoside,hide]{DUT-thesis-grd}
+\documentclass[twoside,nohide]{DUT-thesis-grd}
 
 %============== 更改数学字体设置（当前默认未启用） ==============
 % 下面两行现在是注释状态，不会生效
@@ -25,8 +18,12 @@
 \author{姓名}
 \studentnumber{学号}
 \advisor{导师}
+\practiceadvisor{实践导师}
 \major{专业}
-\defenddate{2026年03月18日}
+\defenddate{2026年05月20日}
+% 声明页签名图片（作者签名、导师签名）
+\authorsignature{figures/figure1}
+\supervisorsignature{figures/figure2}
 
 % 答辩委员会与答辩信息
 \committeeTitleOne{大连理工大学教授:}
@@ -35,23 +32,16 @@
 \committeeTitleFour{XXXXXXXX大学教授:}
 \committeeTitleFive{大连理工大学研究员:}
 
-\committeeMemberOne{\Anon{ABC}}
-\committeeMemberTwo{DE}
-\committeeMemberThree{FGH}
-\committeeMemberFour{IJK}
-\committeeMemberFive{LM}
+\committeeMemberOne{XXX}
+\committeeMemberTwo{XXX}
+\committeeMemberThree{XXX}
+\committeeMemberFour{XXX}
+\committeeMemberFive{XXX}
 
-\defenseCandidate{硕士生}
-\defenseLocation{大连理工大学综合教学1号楼301室}
-
-% 声明页日期
+\defenseLocation{大连理工大学开发区校区}
 
 %================ 进入正文 ================
 \begin{document}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% 封面
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % 生成封面页
 \maketitle
@@ -59,34 +49,22 @@
 % 生成论文原创性声明和使用授权页
 \makeDeclareOriginal
 
-% 如果需要把“版权使用授权书”加进目录，可取消下面这行注释
-%\addcontentsline{toc}{chapter}{大连理工大学学位论文版权使用授权书}
-
 % 生成答辩委员会信息页
 \committee
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% 前置部分
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% frontmatter 表示进入前置部分：
-% 一般页码会改为罗马数字，章节编号规则也不同
+%================ 进入前置部分 ================
 \frontmatter
 
 % 插入摘要文件
-% 实际内容在 chapters/abstract.tex
 \include{chapters/abstract}
-
-% 符号对照表，可选；如果不用，可以把后面的 \input{chapters/denotation} 注释掉
 
 % 生成中文目录
 \tableofcontents
 
-% 生成英文目录（这是模板类自定义命令，不是标准 LaTeX 原生命令）
+% 生成英文目录
 \tableofengcontents
 
-% 加入图、表目录
-% 同时临时去掉图表目录里“各章之间的额外垂直间距”，让目录更紧凑
+% 临时去掉图表目录里“各章之间的额外垂直间距”，让目录更紧凑
 \let\origaddvspace\addvspace
 \renewcommand{\addvspace}[1]{}
 
@@ -104,26 +82,15 @@
 \renewcommand{\addvspace}[1]{\origaddvspace{#1}}
 
 % 插入符号对照表
-% 实际内容在 chapters/denotation.tex
 \input{chapters/denotation}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% 正主体部分
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% mainmatter 表示进入正文主体部分：
-% 一般会开始使用阿拉伯数字页码，并恢复正常章节编号
+%================ 进入正文部分 ================
 \mainmatter
 
-%% 各章正文内容
-
-% 默认 twoside 文档在新章开始时可能会强制从奇数页（右页）开始
-% 这里把 cleardoublepage 临时替换为 clearpage，
-% 这样封面以及目录等会插入空白页而章节之间不会自动插入空白页
+% 临时关闭“空白页”，这样封面以及目录等会插入空白页而章节之间不会自动插入空白页
 \DUTDisableBlankPage
 
-% 按顺序插入各章正文
-% 实际内容分别在 chapters/chapter1.tex ... chapter6.tex
+% 按插入各章正文
 \include{chapters/chapter1}
 \include{chapters/chapter2}
 \include{chapters/chapter3}
@@ -131,19 +98,10 @@
 \include{chapters/chapter5}
 \include{chapters/chapter6}
 
-%% 参考文献
-%% 使用 BibTeX，而不是 biblatex/biber
-%% 参考文献数据库文件在 reference/chap1.bib
-
+% 参考文献
 % 如果你有多个 .bib 文件，可以用下面这种写法（当前被注释）
 %\bibliography{reference/chap1,reference/chap2}
-
-% 当前实际使用的参考文献数据库
 \bibliography{reference/chap1}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% 后置部分
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% 附录
 %% appendx 之后，章节会重新编号，通常变成 A、B、C...
@@ -156,18 +114,18 @@
 \ctexset{chapter={name={附录}}}
 
 % 附录中的图、表、公式、代码编号改成 A.1 / A.2 这种形式
-\renewcommand\thefigure{\Alph{chapter}.\arabic{figure}}
-\renewcommand\thetable{\Alph{chapter}.\arabic{table}}
+\renewcommand{\thefigure}{\Alph{chapter}.\arabic{figure}}
+\renewcommand{\thetable}{\Alph{chapter}.\arabic{table}}
 \renewcommand{\theequation}{\Alph{chapter}.\arabic{equation}}
 \renewcommand{\thelstlisting}{\Alph{chapter}.\arabic{lstlisting}}
 
 % 设置附录中表格标题名称
-\renewcommand\tablename{附录-表}
+\renewcommand{\tablename}{附录-表}
 % 设置英文第二标题中的表名（模板双语 caption 用）
 \captionsetup[table][bi-second]{name=App.Tab.}
 
 % 设置附录中图片标题名称
-\renewcommand\figurename{附录-图}
+\renewcommand{\figurename}{附录-图}
 % 设置英文第二标题中的图名
 \captionsetup[figure][bi-second]{name=App.Fig.}
 
@@ -175,7 +133,7 @@
 \include{chapters/app1} 
 \include{chapters/app2} 
 
-% backmatter 表示进入后置部分
+%================ 进入后置部分 ================
 % 一般这后面的章节不再按正文方式编号
 \backmatter
 

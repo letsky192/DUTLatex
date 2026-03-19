@@ -76,7 +76,10 @@
 %%   \author{author_name}
 %%   \studentnumber{student_id}
 %%   \advisor{advisor_name}
+%%   \practiceadvisor{practice_advisor_name}
 %%   \major{major_name}
+%%   \authorsignature{signature_path}
+%%   \supervisorsignature{signature_path}
 %%
 %% [7.2 声明接口]
 %%   \defenddate{yyyy年mm月dd日}
@@ -84,7 +87,6 @@
 %% [7.3 委员会接口]
 %%   \committeeTitleOne{title_1} ... \committeeTitleFive{title_5}
 %%   \committeeMemberOne{name_1} ... \committeeMemberFive{name_5}
-%%   \defenseCandidate{candidate_name}
 %%   \defenseLocation{location}
 %%
 %% [7.4 扩展接口（默认未启用）]
@@ -292,13 +294,13 @@
 \def\DUT@label@author{作~~者~~姓~~名:}
 \def\DUT@label@studentnumber{学~~~~~~~~~~~~~~号:}
 \def\DUT@label@advisor{指~~导~~教~~师:}
+\def\DUT@label@practiceadvisor{实~~践~~导~~师:}
 \def\DUT@label@defenddate{答~~辩~~日~~期:}
 \def\DUT@label@cover@degree{硕士学位论文}
 \def\DUT@label@cover@spec{大连理工大学硕士学位论文格式规范}
 \def\DUT@label@cover@spec@en{Format Criterion of Master Degree Thesis of DUT}
 \def\DUT@label@cover@school{大连理工大学}
 \def\DUT@label@cover@school@en{Dalian University of Technology}
-\def\DUT@label@cover@note{注：对于专业学位硕士,企业或实践导师必填,写法样例:XXX(企业导师)或XXX(实践导师)}
 \def\DUT@label@abstract{摘要}
 \def\DUT@label@keywords{关键词：}
 \def\DUT@label@englishkeywords{Key Words:~}
@@ -334,9 +336,12 @@
 \def\DUT@value@title{论文题目}
 \def\DUT@value@author{姓名}
 \def\DUT@value@advisor{导师}
+\def\DUT@value@practiceadvisor{实践导师}
 \def\DUT@value@major{专业}
 \def\DUT@value@studentnumber{学号}
 \def\DUT@value@defenddate{2026年03月18日}
+\def\DUT@value@authorsignature{figures/figure2}
+\def\DUT@value@supervisorsignature{figures/figure1}
 
 %% 6.2 声明（label / value）
 %% 用途：声明页固定文字
@@ -372,7 +377,6 @@
 \def\DUT@value@committee@profthree{委员3}
 \def\DUT@value@committee@proffour{委员4}
 \def\DUT@value@committee@proffive{委员5}
-\def\DUT@value@defense@candidate{答辩人}
 \def\DUT@value@defense@location{答辩地点}
 
 %% 6.4 未使用变量（label / value）
@@ -419,7 +423,10 @@
 \renewcommand{\author}[1]{\def\DUT@value@author{#1}}
 \newcommand{\studentnumber}[1]{\def\DUT@value@studentnumber{#1}}
 \newcommand{\advisor}[1]{\def\DUT@value@advisor{#1}}
+\newcommand{\practiceadvisor}[1]{\def\DUT@value@practiceadvisor{#1}}
 \newcommand{\major}[1]{\def\DUT@value@major{#1}}
+\newcommand{\authorsignature}[1]{\def\DUT@value@authorsignature{#1}}
+\newcommand{\supervisorsignature}[1]{\def\DUT@value@supervisorsignature{#1}}
 
 %% 7.2 声明接口
 %% 用途：声明日期由 \defenddate 自动拆分
@@ -439,7 +446,6 @@
 \newcommand{\committeeMemberThree}[1]{\def\DUT@value@committee@profthree{#1}}
 \newcommand{\committeeMemberFour}[1]{\def\DUT@value@committee@proffour{#1}}
 \newcommand{\committeeMemberFive}[1]{\def\DUT@value@committee@proffive{#1}}
-\newcommand{\defenseCandidate}[1]{\def\DUT@value@defense@candidate{#1}}
 \newcommand{\defenseLocation}[1]{\def\DUT@value@defense@location{#1}}
 
 %% 7.4 未使用变量接口
@@ -636,7 +642,7 @@
   \fancyhf{}
   \fancyfoot[C]{\songti\zihao{5} \thepage}  %%页脚中部显示页码
   \fancyhead[CO]{\zihao{5}{\songti \DUT@label@headschoolname}}%%页眉奇数页
-  \fancyhead[CE]{\zihao{5}{\songti \DUT@label@headspecname}}%%页眉偶数页
+  \fancyhead[CE]{\zihao{5}{\songti \DUT@value@title}}%%页眉偶数页
 }
 
 %% 全局默认页眉页脚与 plain 样式
@@ -1019,12 +1025,13 @@
     \vskip 10pt
     {\songti\zihao{-3}\DUT@label@advisor}\DUTunderline[170pt]{\songti\zihao{-3}\DUT@value@advisor}
     \vskip 10pt
+    {\songti\zihao{-3}\DUT@label@practiceadvisor}\DUTunderline[170pt]{\songti\zihao{-3}\DUT@value@practiceadvisor}
+    \vskip 10pt
     {\songti\zihao{-3}\DUT@label@major}\DUTunderline[170pt]{\songti\zihao{-3}\DUT@value@major}
     \vskip 10pt
     {\songti\zihao{-3}\DUT@label@defenddate}\DUTunderline[170pt]{\songti\zihao{-3}\DUT@value@defenddate}
     \vskip 3pt
-    \colorbox{yellow}{\DUT@label@cover@note}
-    \\ \vspace{31.4mm}
+    \vspace{31.4mm}
     {\Large\xkai \DUT@label@cover@school\\}
     \vspace{2.3mm}
     {\zihao{-4} \DUT@label@cover@school@en}
@@ -1060,7 +1067,7 @@
   {\songti\zihao{-4}\DUT@label@thesistitle}\DUTunderline[303pt]{\DUT@value@title}
   \vskip 3pt
   \indent{\songti\zihao{-4}\DUT@label@author@sign}
-  \DUTunderline[8em]{\includegraphics[height=0.8cm]{figures/figure2}}
+  \DUTunderline[8em]{\includegraphics[height=0.8cm]{\DUT@value@authorsignature}}
   \hspace{1.3em}
   {\songti\zihao{-4}\DUT@label@date}\DUTunderline[4em]{\DUT@defend@year}~年~\DUTunderline[2em]{\DUT@defend@month}~月~\DUTunderline[2em]{\DUT@defend@day}~日~
 
@@ -1076,11 +1083,11 @@
   {\songti\zihao{-4}\DUT@label@thesistitle}\DUTunderline[303pt]{\DUT@value@title}
   \vskip 3pt
   \indent{\songti\zihao{-4}\DUT@label@author@sign}
-  \DUTunderline[10.65em]{\includegraphics[height=0.8cm]{figures/figure2}}
+  \DUTunderline[10.65em]{\includegraphics[height=0.8cm]{\DUT@value@authorsignature}}
   {\songti\zihao{-4}\DUT@label@date}\DUTunderline[3em]{\DUT@defend@year}年~\DUTunderline[2em]{\DUT@defend@month}~月~\DUTunderline[2em]{\DUT@defend@day}~日~
   \vskip 3pt
   \indent{\songti\zihao{-4}\DUT@label@supervisor@sign}
-  \DUTunderline[10.65em]{\includegraphics[height=0.8cm]{figures/figure1}}
+  \DUTunderline[10.65em]{\includegraphics[height=0.8cm]{\DUT@value@supervisorsignature}}
   {\songti\zihao{-4}\DUT@label@date}\DUTunderline[3em]{\DUT@defend@year}~年~\DUTunderline[2em]{\DUT@defend@month}~月~\DUTunderline[2em]{\DUT@defend@day}~日~
   \vskip 3pt
 
@@ -1107,7 +1114,7 @@
   \end{center}
 
   \vskip 50pt
-  {\songti\zihao{4} \noindent{\DUT@label@committee@candidate\DUT@value@defense@candidate}}
+  {\songti\zihao{4} \noindent{\DUT@label@committee@candidate\DUT@value@author}}
   \vskip 35pt
   {\songti\zihao{4} \noindent{\DUT@label@committee@members}}
   \vskip 25pt
